@@ -6,15 +6,27 @@
   "scripts": {
     "dev": "vite --open",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:test": "vue-tsc && vite build --mode test",
+    "build:pro": "vue-tsc && vite build --mode production"
   },
   "dependencies": {
-    "vue": "^3.4.21"
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.6.1",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.21",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
+    "axios": "^1.6.8",
+    "fast-glob": "^3.3.2",
+    "mockjs": "^1.1.0",
+    "sass": "^1.72.0",
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
+    "vite-plugin-mock": "2.9.6",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^1.8.27"
   }
 }
