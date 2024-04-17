@@ -5,7 +5,14 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { useUserStore } from '@/store/modules/user';
 import Tabbar from './tabbar/index.vue'
+
+const $route = useRoute();
+const userStore = useUserStore();
+
+console.log(userStore.menuRoutes);
 
 </script>
 

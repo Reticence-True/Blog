@@ -1,15 +1,17 @@
 /** 用户仓库 */
 import { ref } from 'vue'
 import { defineStore } from "pinia"
+import { routes } from "@/routers/routers.ts"
 
-export const userUserStore = defineStore('User', () => {
+export const useUserStore = defineStore('User', () => {
     // state
-    let count = ref(1)
+    const menuRoutes = ref(routes)
+    
     // getter
 
     // action
 
     return {
-        count
+        menuRoutes
     }
 })
