@@ -12,8 +12,6 @@ import Tabbar from './tabbar/index.vue'
 const $route = useRoute();
 const userStore = useUserStore();
 
-console.log(userStore.menuRoutes);
-
 </script>
 
 <style lang="scss" scoped>

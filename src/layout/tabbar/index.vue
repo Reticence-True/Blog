@@ -1,21 +1,25 @@
 <template>
     <div class="tabbar-container">
         <div class="tabbar-left">
-            <h1>Reticence的博客</h1>
+            <Blog></Blog>
         </div>
         <div class="tabbar-right">
-            <el-icon><Notebook /></el-icon>
-            <div class="item">主页</div>
-            <div class="item">主页</div>
-            <div class="item">主页</div>
-            <div class="item">主页</div>
-            <div class="item">主页</div>
+            <Menu></Menu>
+            <User></User>
         </div>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import Blog from "@/layout/blog/index.vue"
+import Menu from "@/layout/menu/index.vue"
+import User from "@/layout/user/index.vue"
 
+</script>
+<script lang="ts">
+export default {
+    name: "Tabbar"
+}
 </script>
 
 <style lang="scss" scoped>
@@ -30,20 +34,13 @@
     // background: #bfa;
 
     .tabbar-left {
-        font-size: 1.1rem;
-        display: flex;
-
         // background: orangered;
     }
 
     .tabbar-right {
         display: flex;
-
-        // background: yellowgreen;
-
-        .item {
-            padding: 0 20px;
-        }
+        justify-content: space-between;
+        align-items: center;
     }
 }
 </style>
