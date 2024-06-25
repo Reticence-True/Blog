@@ -4,16 +4,24 @@
             <Blog></Blog>
         </div>
         <div class="tabbar-right">
-            <Menu></Menu>
+            <el-menu class="route-menu" mode="horizontal" router :default-active="$route.path">
+                <Menu :constantRoutes="userStore.menuRoutes"></Menu>
+            </el-menu>
             <User></User>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import Blog from "@/layout/blog/index.vue"
 import Menu from "@/layout/menu/index.vue"
 import User from "@/layout/user/index.vue"
+
+import { useUserStore } from "@/store/modules/user";
+
+const userStore = useUserStore();
+const $route = useRoute()
 
 </script>
 <script lang="ts">
@@ -25,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 .tabbar-container {
     width: 100%;
-    height: 50px;
+    height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -41,6 +49,10 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .route-menu {
+            height: $tabbar-base-height;
+        }
     }
 }
 </style>

@@ -1,20 +1,25 @@
 <template>
-    <div class="menu">
-        <div class="item">
-            <el-icon>
-                <Notebook />
-            </el-icon>
-            主页
-        </div>
-        <div class="item">帖子</div>
-        <div class="item">留言板</div>
-        <div class="item">友链</div>
-        <div class="item">关于</div>
-    </div>
+    <template v-for="route in constantRoutes" :key="route.path">
+        <!-- 0 孩子 -->
+        <el-menu-item :index="route.path"
+            v-if="route.meta.isVisiable && (!route.children || route.children.length === 0)">
+            {{ route.meta.name }}
+        </el-menu-item>
+        <!-- 1个孩子 -->
+        <el-menu-item :index="route.children[0].path"
+            v-if="route.children && route.children.length === 1 && route.children[0].meta.isVisiable">
+            {{ route.children[0].meta.name }}
+        </el-menu-item>
+        <!-- 多个孩子 -->
+        <el-sub-menu :index="route.path" v-if="route.meta.isVisiable && route.children && route.children.length > 1">
+            <template #title>{{ route.meta.name }}</template>
+            <Menu :constantRoutes="route.children"></Menu>
+        </el-sub-menu>
+    </template>
 </template>
 
 <script setup lang='ts'>
-
+defineProps(["constantRoutes"])
 </script>
 <script lang="ts">
 export default {
@@ -23,12 +28,4 @@ export default {
 </script>
 
 <style>
-.menu {
-    display: flex;
-    align-items: center;
-
-    .item {
-        margin: 0 10px;
-    }
-}
 </style>
