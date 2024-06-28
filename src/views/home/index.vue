@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>我是Home组件</h1>
+        <div class="main-carousel"></div>
     </div>
 </template>
 

@@ -1,6 +1,15 @@
 /** 路由定义 */
 export const routes = [
     {
+        name: 'login',
+        path: '/login',
+        component : () => import("@/views/login/index.vue"),
+        meta: {
+            name: '登录',
+            isVisible: false
+        }
+    },
+    {
         name: 'index',
         path: '/',
         component: () => import('@/layout/index.vue'),

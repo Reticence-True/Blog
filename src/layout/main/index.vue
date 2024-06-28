@@ -16,5 +16,7 @@ export default {
 <style lang="scss" scoped>
     .main {
         margin-top: 10px;
+
+        border: 1px solid #000;
     }
 </style>
