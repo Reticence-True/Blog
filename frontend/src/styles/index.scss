@@ -1,0 +1,20 @@
+/* 全局样式 */
+@import "./reset.scss";
+@font-face {
+    font-family: 'Alibaba PuHuiTi';
+    src: url('../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf') format('truetype'),
+    url('../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.otf') format('opentype'),
+    url('../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff') format('woff'),
+    url('../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff2') format('woff2')
+    ;
+
+    font-display: warp;
+}
+
+* {
+    font-family: 'Alibaba PuHuiTi' sans-serif;
+}
+
+:root {
+    font-size: 62.5%; 
+}
