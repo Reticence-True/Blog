@@ -9,29 +9,31 @@ const stringEncryption = require('@utils/stringEncryption')
 class RegisterController {
     /**
      * 检查用户名是否已存在
-     * @param {string} username 用户名
-     * @returns {Promise<boolean>} 是否存在
+     * @param {import('express').Request} req 请求参数
+     * @param {import('express').Response} res 响应参数
      */
-    static async checkUsernameExists(username) {
+    static async checkUsernameExists(req, res) {
+        const { username } = req.body
         try {
-            const user = await RegisterService.getUser(username)
-            return !!user
+            const user = await RegisterService.getUserByUsername(username)
+            res.success({ exists: !!user })
         } catch (e) {
-            throw new Error('检查用户名失败: ' + e)
+            res.fail(400, '检查用户名失败')
         }
     }
 
     /**
      * 检查邮箱是否已存在
-     * @param {string} email 邮箱
-     * @returns {Promise<boolean>} 是否存在
+     * @param {import('express').Request} req 请求参数
+     * @param {import('express').Response} res 响应参数
      */
-    static async checkEmailExists(email) {
+    static async checkEmailExists(req, res) {
+        const { email } = req.body
         try {
-            const user = await RegisterService.getUser(email)
-            return !!user
+            const user = await RegisterService.getUserByEmail(email)
+            res.success({ exists: !!user })
         } catch (e) {
-            throw new Error('检查邮箱失败: ' + e)
+            res.fail(400, '检查邮箱失败')
         }
     }
 
@@ -43,29 +45,16 @@ class RegisterController {
     static async register(req, res) {
         const { username, email, password } = req.body
         try {
-            const isUsernameExists =
-                await RegisterController.checkUsernameExists(username)
-            const isEmialExists =
-                await RegisterController.checkEmailExists(email)
-            // 错误信息数组
-            let errMsg = []
-
-            // 重名和邮箱重复检查
-            if (!(isUsernameExists || isEmialExists)) {
-                // 存储到redis缓存
-                await RedisService.set(
-                    `user:${email}`,
-                    JSON.stringify({ username, email, password }),
-                    6000,
-                )
-                res.success()
-                return
-            }
-            if (isUsernameExists) errMsg.push('用户名不能重复')
-            if (isEmialExists) errMsg.push('邮箱已存在')
-            res.fail(400, errMsg)
+            // 存储到redis缓存
+            await RedisService.set(
+                `user:${email}`,
+                JSON.stringify({ username, email, password }),
+                6000,
+            )
+            res.success()
+            return
         } catch (e) {
-            throw new Error('用户名或邮箱查重错误，Error: ' + e)
+            throw new Error('Redis错误，Error: ' + e)
         }
     }
 
@@ -89,8 +78,7 @@ class RegisterController {
                 } else {
                     res.fail(500, 'Redis错误')
                 }
-            }
-            else {
+            } else {
                 res.fail(400, '用户信息失效，请重新注册')
             }
         } catch (e) {

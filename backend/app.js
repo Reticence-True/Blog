@@ -7,7 +7,9 @@ const cookieParser = require('cookie-parser')
 // 自定义中间件
 const responseMiddleware = require('@middleware/responseMiddleware')
 // 路由
-const apiRouter = require('@routes/api')
+const registerRouter = require('@routes/register')
+const loginRouter = require('@routes/login')
+const roleRouter = require('@routes/role')
 
 const app = express()
 const host = process.env.HOST || 'localhost'
@@ -20,7 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 // 路由
-app.use('/api', apiRouter)
+app.use('/register', registerRouter)
+app.use('/login', loginRouter)
+app.use('/role', roleRouter)
 
 // 页面不存在
 app.use((req, res) => {

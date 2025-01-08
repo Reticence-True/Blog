@@ -18,15 +18,26 @@ class RegisterService {
     }
 
     /**
-     * 根据用户名/邮箱查找用户
-     * @param {string} user 用户名/邮箱
+     * 根据用户名查找用户
+     * @param {string} username 用户名
      * @returns {Promise<object>} 用户数据
      */
-    static async getUser(user) {
+    static async getUserByUsername(username) {
         try {
-            return await userModel.findOne({
-                $or: [{ username: user }, { email: user }],
-            })
+            return await userModel.findOne({ username })
+        } catch (e) {
+            throw new Error('error ' + e)
+        }
+    }
+
+    /**
+     * 根据邮箱查找用户
+     * @param {string} email 邮箱
+     * @returns {Promise<object>} 用户数据
+     */
+    static async getUserByEmail(email) {
+        try {
+            return await userModel.findOne({ email })
         } catch (e) {
             throw new Error('error ' + e)
         }

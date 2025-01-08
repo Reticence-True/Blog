@@ -4,14 +4,14 @@ import { defineStore } from 'pinia'
 import { routes } from '@/routers/routers.ts'
 
 export const useUserStore = defineStore('User', () => {
-  // state
-  const menuRoutes = ref(routes)
+    // state
+    const menuRoutes = ref(routes)
 
-  // getter
+    // getter
 
-  // action
+    // action
 
-  return {
-    menuRoutes,
-  }
+    return {
+        menuRoutes,
+    }
 })

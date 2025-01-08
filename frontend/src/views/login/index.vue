@@ -1,250 +1,138 @@
 <template>
-  <div class="app">
-    <div class="container">
-      <div class="form-page" ref="formPage">
-        <div class="left-login">
-          <div class="title">
-            <div>登 录</div>
-          </div>
-          <div class="login-form">
-            <el-form
-              label-width="80px"
-              :inline="false"
-              size="large"
-              label-position="top"
-            >
-              <el-form-item>
-                <el-input
-                  placeholder="用户名"
-                  size="large"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-input
-                  placeholder="密码"
-                  size="large"
-                  show-password
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary">登录</el-button>
-              </el-form-item>
-              <el-form-item>
-                <el-link
-                  type="info"
-                  size="small"
-                  :underline="false"
-                  target="_blank"
-                  href=""
+    <div class="app">
+        <div class="container">
+            <div class="form-page" ref="formPage">
+                <div class="left-login">
+                    <Login></Login>
+                </div>
+                <div class="right-signup">
+                    <Signup></Signup>
+                </div>
+            </div>
+            <div class="switch-btn-page" ref="btnPage">
+                <el-button
+                    type="primary"
+                    size="large"
+                    class="switch-2-signup"
+                    @click="switchLoginShow"
                 >
-                  忘记密码？
-                </el-link>
-              </el-form-item>
-            </el-form>
-          </div>
+                    Sign up 注册
+                </el-button>
+                <el-button
+                    type="primary"
+                    size="large"
+                    class="switch-2-login"
+                    @click="switchSignupShow"
+                >
+                    Log in 登录
+                </el-button>
+            </div>
         </div>
-        <div class="right-signup">
-          <div class="title">注 册</div>
-          <div class="signup-form">
-            <el-form
-              label-width="80px"
-              :inline="false"
-              size="large"
-              label-position="top"
-              :model="userInfo"
-            >
-              <el-form-item>
-                <el-input
-                  placeholder="用户名"
-                  size="large"
-                  v-model="userInfo.username"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-input
-                  placeholder="邮箱"
-                  size="large"
-                  v-model="userInfo.eamil"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-input
-                  placeholder="密码"
-                  size="large"
-                  show-password
-                  v-model="userInfo.password"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary">注册</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
-        </div>
-      </div>
-      <div class="switch-btn-page" ref="btnPage">
-        <el-button
-          type="primary"
-          size="large"
-          class="switch-2-signup"
-          @click="switchLoginShow"
-        >
-          Sign up 注册
-        </el-button>
-        <el-button
-          type="primary"
-          size="large"
-          class="switch-2-login"
-          @click="switchSignupShow"
-        >
-          Log in 登录
-        </el-button>
-      </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
-let formPage: any, btnPage: any
+import Login from './login'
+import Signup from './signup'
 
-let userInfo: any = {
-  username: '',
-  password: '',
-  email: '',
-}
+let formPage: any, btnPage: any
 
 // 切换登录页显示
 const switchLoginShow = () => {
-  formPage.style.transform = 'translateX(50%)'
-  btnPage.style.transform = 'translateX(-50%)'
+    formPage.style.transform = 'translateX(50%)'
+    btnPage.style.transform = 'translateX(-50%)'
 }
 
 // 切换注册页显示
 const switchSignupShow = () => {
-  formPage.style.transform = 'translateX(0)'
-  btnPage.style.transform = 'translateX(0)'
+    formPage.style.transform = 'translateX(0)'
+    btnPage.style.transform = 'translateX(0)'
 }
 </script>
 <script lang="ts">
 export default {
-  name: 'login',
+    name: 'login',
 }
 </script>
 
 <style scoped lang="scss">
 .app {
-  width: 100%;
-  height: 100vh;
-  background: url('@/assets/images/login_background.jpg') no-repeat center fixed;
-  background-size: cover;
+    width: 100%;
+    height: 100vh;
+    background: url('@/assets/images/login_background.jpg') no-repeat center
+        fixed;
+    background-size: cover;
 
-  .container {
-    width: 90%;
-    height: 90%;
-    border: 1px solid #fff;
-    border-radius: 2rem;
-    text-align: center;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    box-shadow: 3.5px 3.5px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-
-    .form-page {
-      width: 100%;
-      height: 100%;
-      transform: translateX(0);
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: all 500ms;
-
-      .left-login,
-      .right-signup {
-        width: 50%;
-        height: 100%;
-        border-radius: inherit;
-        background: #e9e9e9;
-        position: absolute;
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: column;
-      }
-
-      .left-login {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+    .container {
+        width: 90%;
+        height: 90%;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        text-align: center;
+        position: relative;
+        top: 50%;
         left: 50%;
-        transform: translateX(0);
-      }
+        transform: translateX(-50%) translateY(-50%);
+        box-shadow: 3.5px 3.5px 1.5px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
 
-      .right-signup {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        left: 0;
-        transform: translateX(-100%);
-      }
+        .form-page {
+            width: 100%;
+            height: 100%;
+            transform: translateX(0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 500ms;
 
-      .title {
-        font-size: 6rem;
-        color: #000;
-      }
+            .left-login,
+            .right-signup {
+                width: 50%;
+                height: 100%;
+                border-radius: inherit;
+                background: #e9e9e9;
+                position: absolute;
+            }
 
-      .login-form,
-      .signup-form {
-        width: 80%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
+            .left-login {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                left: 50%;
+                transform: translateX(0);
+            }
 
-        .el-input {
-          width: 100%;
-          height: 5rem;
+            .right-signup {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                left: 0;
+                transform: translateX(-100%);
+            }
         }
 
-        .el-button {
-          margin: 0 auto;
+        .switch-btn-page {
+            transform: translateX(0);
+            transition: all 500ms;
+
+            .switch-2-signup {
+                position: absolute;
+                top: 28rem;
+                left: 26.5rem;
+            }
+
+            .switch-2-login {
+                position: absolute;
+                top: 28rem;
+                left: calc(100% + 26.5rem);
+            }
         }
-      }
     }
-
-    .switch-btn-page {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: translateX(0);
-      transition: all 500ms;
-
-      .switch-2-signup {
-        position: absolute;
-        top: 50%;
-        left: 25%;
-        transform: translateX(-50%) translateY(-50%);
-      }
-
-      .switch-2-login {
-        position: absolute;
-        top: 50%;
-        left: 125%;
-        transform: translateX(-50%) translateY(-50%);
-      }
-    }
-
-    .el-button {
-      width: 15.5rem;
-      height: 4.5rem;
-      font-size: 2rem;
-      margin: 0;
-    }
-  }
+}
+</style>
+<style ::v-deep lang="scss">
+.el-button {
+    width: 15.5rem;
+    height: 4.5rem;
+    font-size: 2rem;
+    margin: 0;
 }
 </style>

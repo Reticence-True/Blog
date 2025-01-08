@@ -10,5 +10,9 @@ router.post('/', RegisterController.register)
 router.post('/get-varification-code', RegisterController.getVarificationCode)
 // 邮箱验证
 router.post('/email-varification', RegisterController.emailVarification)
+// 根据用户名检查用户是否存在
+router.post('/check-exists-by-username', RegisterController.checkUsernameExists)
+// 根据邮箱检查用户是否存在
+router.post('/check-exists-by-email', RegisterController.checkEmailExists)
 
 module.exports = router
