@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 // element-plus
 import ElementPlus from 'element-plus'
-// @ts-ignore
+// @ts-expect-error
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 // svg插件
@@ -13,15 +13,15 @@ import globalComponent from '@/components/index.ts'
 // 模板的全局样式
 import '@/styles/index.scss'
 // 路由
-import { router } from "@/routers/index.ts"
+import { router } from '@/routers/index.ts'
 // app
 import App from './App.vue'
 
-const app = createApp(App);
+const app = createApp(App)
 
 // ElementPlus的i18n
 app.use(ElementPlus, {
-    locale: zhCn
+  locale: zhCn,
 })
 app.use(globalComponent)
 // 路由

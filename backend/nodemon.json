@@ -1,0 +1,11 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", ".svn", "node_modules/**/node_modules"],
+  "verbose": true,
+  "exec": "node app.js",
+  "watch": ["./"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": ".js, .json"
+}

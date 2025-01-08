@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
+    "start": "pnpm run dev",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "build:test": "vue-tsc && vite build --mode test",

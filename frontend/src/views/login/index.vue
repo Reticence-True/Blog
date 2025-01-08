@@ -18,7 +18,6 @@
                   placeholder="用户名"
                   size="large"
                   clearable
-                  @change=""
                 ></el-input>
               </el-form-item>
               <el-form-item>
@@ -27,11 +26,10 @@
                   size="large"
                   show-password
                   clearable
-                  @change=""
                 ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="">登录</el-button>
+                <el-button type="primary">登录</el-button>
               </el-form-item>
               <el-form-item>
                 <el-link
@@ -55,21 +53,22 @@
               :inline="false"
               size="large"
               label-position="top"
+              :model="userInfo"
             >
               <el-form-item>
                 <el-input
                   placeholder="用户名"
                   size="large"
+                  v-model="userInfo.username"
                   clearable
-                  @change=""
                 ></el-input>
               </el-form-item>
               <el-form-item>
                 <el-input
                   placeholder="邮箱"
                   size="large"
+                  v-model="userInfo.eamil"
                   clearable
-                  @change=""
                 ></el-input>
               </el-form-item>
               <el-form-item>
@@ -77,12 +76,12 @@
                   placeholder="密码"
                   size="large"
                   show-password
+                  v-model="userInfo.password"
                   clearable
-                  @change=""
                 ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="">注册</el-button>
+                <el-button type="primary">注册</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -113,13 +112,27 @@
 <script setup lang="ts">
 let formPage: any, btnPage: any
 
+let userInfo: any = {
+  username: '',
+  password: '',
+  email: '',
+}
+
+// 切换登录页显示
 const switchLoginShow = () => {
   formPage.style.transform = 'translateX(50%)'
   btnPage.style.transform = 'translateX(-50%)'
 }
+
+// 切换注册页显示
 const switchSignupShow = () => {
   formPage.style.transform = 'translateX(0)'
   btnPage.style.transform = 'translateX(0)'
+}
+</script>
+<script lang="ts">
+export default {
+  name: 'login',
 }
 </script>
 
