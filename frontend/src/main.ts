@@ -14,6 +14,7 @@ import globalComponent from '@/components/index.ts'
 import '@/styles/index.scss'
 // 路由
 import { router } from '@/routers/index.ts'
+import './permission'
 // app
 import App from './App.vue'
 
@@ -21,7 +22,7 @@ const app = createApp(App)
 
 // ElementPlus的i18n
 app.use(ElementPlus, {
-  locale: zhCn,
+    locale: zhCn,
 })
 app.use(globalComponent)
 // 路由

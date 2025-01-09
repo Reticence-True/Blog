@@ -23,7 +23,7 @@ const responseMiddleware = function (_, res, next) {
      * // 返回: { code: 401, status: 'error', message: '未授权访问', data: null }
      */
     res.fail = function (code = 400, message = 'error') {
-        return res.status(code).json(ResponseHandler.fail(code, message))
+        return res.status(200).json(ResponseHandler.fail(code, message))
     }
 
     next()

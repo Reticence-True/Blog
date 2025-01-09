@@ -7,7 +7,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 // import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd()) // 获取环境变量信息
     return {
         plugins: [
@@ -35,6 +35,12 @@ export default defineConfig(({ command, mode }) => {
                     additionalData: '@import "./src/styles/variable.scss";',
                 },
             },
+        },
+        // 添加 source map 配置
+        build: {
+            sourcemap: true,
+            // 如果需要，可以禁用 source map
+            // sourcemap: false,
         },
         // 代理跨域
         server: {

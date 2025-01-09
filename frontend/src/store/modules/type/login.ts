@@ -3,5 +3,4 @@ export interface LoginUser {
     username: string
     password: string
     email: string
-    verificationCode: string
 }

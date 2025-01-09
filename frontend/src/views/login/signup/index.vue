@@ -36,7 +36,14 @@
                     />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">注册</el-button>
+                    <el-button
+                        type="primary"
+                        :disabled="btnDisabled"
+                        :loading="btnDisabled"
+                        @click="signupEvent"
+                    >
+                        注册
+                    </el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -44,19 +51,27 @@
 </template>
 
 <script setup lang="ts">
-import { reqCheckExistsByEmail, reqCheckExistsByUsername } from '@/api/signup'
+import {
+    reqCheckExistsByEmail,
+    reqCheckExistsByUsername,
+    reqSignUp,
+} from '@/api/signup'
 import { UserInfo } from '@/api/signup/type'
 import { useLoginStore } from '@/store/modules/login'
-import { FormRules } from 'element-plus'
+import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
+const $router = useRouter()
 const loginStore = useLoginStore()
-let signupFormRef = ref()
+let signupFormRef = ref<FormInstance>()
 let userInfo = reactive<UserInfo>({
-    username: '',
-    password: '',
-    email: '',
+    username: 'admin',
+    password: '123456',
+    email: '3328872822@qq.com',
 })
+// 按钮禁用
+let btnDisabled = ref<boolean>(false)
 
 // 规则函数
 // 用户名
@@ -77,7 +92,7 @@ const emailRulesFunc = async (_rule: any, val: any, callback: any) => {
     // 正则邮箱匹配
     const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
     if (!emailReg.test(trimVal)) return callback(new Error('邮箱格式不正确'))
-    // 判断邮箱是否存在s
+    // 判断邮箱是否存在
     let res = await reqCheckExistsByEmail(trimVal)
     if (res.data.exists) return callback(new Error('邮箱已存在'))
 
@@ -87,7 +102,7 @@ const emailRulesFunc = async (_rule: any, val: any, callback: any) => {
 const passwordRulesFunc = (_rule: any, val: any, callback: any) => {
     let trimVal = val.trim()
     if (!trimVal) return callback(new Error('密码不能为空'))
-    if (trimVal.length > 5) return callback(new Error('密码需要大于5位'))
+    if (trimVal.length < 5) return callback(new Error('密码需要大于5位'))
 
     callback()
 }
@@ -114,6 +129,33 @@ let rules: FormRules = {
             trigger: 'blur',
         },
     ],
+}
+
+// 注册按钮事件
+const signupEvent = async () => {
+    btnDisabled.value = true
+
+    // 校验表单
+    try {
+        await signupFormRef.value?.validate()
+    } catch (e) {
+        btnDisabled.value = false
+        return
+    }
+
+    // 表单通过
+    Object.assign(loginStore.loginUser, JSON.parse(JSON.stringify(userInfo)))
+    // 发送注册请求
+    let res = await reqSignUp(userInfo)
+    if (res.code === 200) {
+        $router.push('/email-verification')
+    } else {
+        ElMessage({
+            type: 'error',
+            message: '注册失败',
+        })
+    }
+    btnDisabled.value = false
 }
 </script>
 <script lang="ts">

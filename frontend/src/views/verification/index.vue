@@ -1,0 +1,168 @@
+<template>
+    <div class="app">
+        <div class="container">
+            <el-page-header @back="$router.back()">
+                <template #content>
+                    <span class="text-large font-600 mr-3">邮箱验证</span>
+                </template>
+            </el-page-header>
+            <div class="verification-form">
+                <el-form inline style="display: block">
+                    <el-form-item>
+                        <el-input
+                            placeholder="请输入邮箱验证码"
+                            v-model="code"
+                        />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button
+                            type="primary"
+                            size="default"
+                            @click="getCode"
+                            :disabled="codeBtnIsDisabled"
+                            :loading="codeBtnLoading"
+                        >
+                            {{ codeBtnText }}
+                        </el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <el-button
+                type="primary"
+                size="large"
+                class="verification"
+                :disabled="!(code || verifyBtnIsDisabled)"
+                :loading="verifyBtnIsDisabled"
+                @click="vefifyCode"
+            >
+                验证
+            </el-button>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { useLoginStore } from '@/store/modules/login'
+import type { SignupResponseData } from '@/api/signup/type'
+import { reqGetVerificationCode, reqVerifyAuth } from '@/api/signup'
+import { reqLogin } from '@/api/login'
+
+const $router = useRouter()
+let loginStore = useLoginStore()
+let code = ref<string>('')
+
+/* 获取验证码 */
+const countdown = 60
+// 倒计时秒数
+let leftSeconds = ref<number>(countdown)
+// 验证码按钮可用性
+let codeBtnIsDisabled = ref<boolean>(false)
+// 验证码按钮文字
+let codeBtnText = ref<string>('获取验证码')
+// 验证码按钮加载
+let codeBtnLoading = ref<boolean>(false)
+
+/* 验证 */
+// 验证按钮可用
+let verifyBtnIsDisabled = ref<boolean>(false)
+
+// 获取验证码
+const getCode = async () => {
+    codeBtnIsDisabled.value = true
+    codeBtnLoading.value = true
+    let res: SignupResponseData = await reqGetVerificationCode(
+        loginStore.loginUser.email,
+    )
+    codeBtnLoading.value = false
+    // 获取成功
+    if (res.code === 200) {
+        btnCountdown()
+    } else {
+        codeBtnIsDisabled.value = false
+        ElMessage({
+            type: 'error',
+            message: '验证码获取失败',
+        })
+    }
+}
+
+// 验证码按钮倒计时
+const btnCountdown = () => {
+    let interval = setInterval(() => {
+        codeBtnText.value = `${leftSeconds.value}s后重新获取`
+        leftSeconds.value--
+        if (leftSeconds.value == 0) {
+            leftSeconds.value = countdown
+            codeBtnText.value = '重新获取'
+            codeBtnIsDisabled.value = false
+            clearInterval(interval)
+        }
+    }, 1000)
+}
+
+// 验证
+const vefifyCode = async () => {
+    let { username, password, email } = loginStore.loginUser
+    // 改为全大写
+    let pureCode = code.value.toUpperCase()
+    // 按钮不可用
+    verifyBtnIsDisabled.value = true
+    // 发送请求
+    let res = await reqVerifyAuth(email, pureCode)
+    if (res.code === 200) {
+        // 自动登录(记住我)
+        let loginRes = await reqLogin({ username, password, rememberMe: true })
+        if (loginRes.code !== 200) {
+            ElMessage({
+                type: 'error',
+                message: '自动登录失败',
+            })
+            return
+        }
+        // 跳转主页
+        window.location.replace('/')
+    } else {
+        ElMessage({
+            type: 'error',
+            message: '验证失败',
+        })
+    }
+    verifyBtnIsDisabled.value = false
+}
+</script>
+
+<style scoped lang="scss">
+.app {
+    width: 100%;
+    height: 100vh;
+    background: url('@/assets/images/login_background.jpg') no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .container {
+        width: 45%;
+        height: 40%;
+        border-radius: 12px;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+        border: 1px solid #fff;
+        background-color: #f9f8f8;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 30px;
+
+        .verification-form {
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+</style>

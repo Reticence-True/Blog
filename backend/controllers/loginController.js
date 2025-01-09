@@ -24,37 +24,32 @@ class LoginController {
      */
     static async login(req, res) {
         const { username, password, rememberMe } = req.body
-        // try {
-            // 查询数据库用户数据
-            const dbUser = await LoginService.getUserByUsername(username)
-            if (!dbUser) {
-                return res.fail(400, '用户不存在')
-            }
-            // 检查密码是否正确
-            if (await bcryptjs.compare(password, dbUser.password)) {
-                // 生成token
-                const token = jwt.sign({...dbUser}, process.env.SECRET_KEY, {
-                    expiresIn: LoginController.#expiresIn,
-                })
+        // 查询数据库用户数据
+        const dbUser = await LoginService.getUserByUsername(username)
+        if (!dbUser) {
+            return res.fail(400, '用户不存在')
+        }
+        // 检查密码是否正确
+        if (await bcryptjs.compare(password, dbUser.password)) {
+            // 生成token
+            const token = jwt.sign({ ...dbUser }, process.env.SECRET_KEY, {
+                expiresIn: LoginController.#expiresIn,
+            })
 
-                // 将token存储在cookie中
-                res.cookie('auth_token', token, {
-                    httpOnly: true,
-                    sameSite: 'strict',
-                    // 如果设置 rememberMe，则设置具体的cookie过期时间，否则只是一次session
-                    ...(rememberMe && {
-                        max_age: LoginController.#cookieExpires // 10天后过期
-                    })
-                })
-                res.success()
-            } else {
-                // 密码错误
-                res.fail(400, '密码错误')
-            }
-        // } catch (e) {
-            // 用户不存在
-            // res.fail(500, '数据库错误')
-        // }
+            // 将token存储在cookie中
+            res.cookie('auth_token', token, {
+                httpOnly: true,
+                sameSite: 'strict',
+                // 如果设置 rememberMe，则设置具体的cookie过期时间，否则只是一次session
+                ...(rememberMe && {
+                    max_age: LoginController.#cookieExpires, // 10天后过期
+                }),
+            })
+            res.success()
+        } else {
+            // 密码错误
+            res.fail(400, '密码错误')
+        }
     }
 }
 

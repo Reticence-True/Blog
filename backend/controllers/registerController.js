@@ -63,7 +63,7 @@ class RegisterController {
      * @param {import('express').Request} req 请求参数
      * @param {import('express').Response} res 响应参数
      */
-    static async getVarificationCode(req, res) {
+    static async getVerificationCode(req, res) {
         const { email } = req.body
         const code = varifyCodeGenerator()
         const hashCode = await stringEncryption(code)
@@ -71,7 +71,7 @@ class RegisterController {
             // 验证用户信息是否存在
             if (await RedisService.exists(`user:${email}`)) {
                 // 设置验证码缓存
-                if (await RedisService.set(`varification:${email}`, hashCode)) {
+                if (await RedisService.set(`verification:${email}`, hashCode)) {
                     // 发送邮件
                     await sendVerificationEmail(email, code)
                     res.success()
@@ -91,19 +91,18 @@ class RegisterController {
      * @param {import('express').Request} req 请求参数
      * @param {import('express').Response} res 响应参数
      */
-    static async emailVarification(req, res) {
-        const { pureVarificationCode, email } = req.body
-
+    static async emailVerification(req, res) {
+        const { pureVerificationCode, email } = req.body
         try {
             // 查询 Redis 中缓存验证码
             const verificationCode = await RedisService.get(
-                `varification:${email}`,
+                `verification:${email}`,
             )
             if (verificationCode) {
                 // 验证是否正确
                 if (
                     !(await bcryptjs.compare(
-                        pureVarificationCode,
+                        pureVerificationCode,
                         verificationCode,
                     ))
                 ) {
@@ -152,7 +151,7 @@ class RegisterController {
             } finally {
                 // 删除redis缓存信息
                 await RedisService.del(`user:${email}`)
-                await RedisService.del(`varification:${email}`)
+                await RedisService.del(`verification:${email}`)
             }
         }
         // 用户信息过期

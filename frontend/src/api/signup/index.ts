@@ -6,9 +6,9 @@ enum API {
     // 用户注册
     SIGNUP_URL = '/register',
     // 获取验证码
-    GET_VERIFICATION_CODE_URL = '/register/get-varification-code',
+    GET_VERIFICATION_CODE_URL = '/register/get-verification-code',
     // 验证身份
-    VERIFY_AUTH_URL = '/register/email-varification',
+    VERIFY_AUTH_URL = '/register/email-verification',
     // 检查用户是否存在
     CHECK_EXISTS_BY_USERNAME = '/register/check-exists-by-username', // 通过用户名
     CHECK_EXISTS_BY_EMAIL = '/register/check-exists-by-email', // 通过邮箱
@@ -19,12 +19,14 @@ export const reqSignUp = (user: UserInfo) =>
     request.post<any, SignupResponseData>(API.SIGNUP_URL, user)
 // 获取验证码
 export const reqGetVerificationCode = (email: string) =>
-    request.post<any, SignupResponseData>(API.GET_VERIFICATION_CODE_URL, email)
+    request.post<any, SignupResponseData>(API.GET_VERIFICATION_CODE_URL, {
+        email,
+    })
 // 验证身份
-export const reqVerifyAuth = (email: string, varificationCode: string) =>
+export const reqVerifyAuth = (email: string, pureVerificationCode: string) =>
     request.post<any, SignupResponseData>(API.VERIFY_AUTH_URL, {
         email,
-        varificationCode,
+        pureVerificationCode,
     })
 // 检擦用户是否存在
 // 检查用户名

@@ -10,7 +10,6 @@ export const useLoginStore = defineStore('loginStore', () => {
         username: '',
         password: '',
         email: '',
-        verificationCode: '',
     })
 
     // getters

@@ -1,15 +1,9 @@
 <template>
-  <div>
-    <div class="main-carousel"></div>
-  </div>
+    <div>
+        <h1>主页</h1>
+    </div>
 </template>
 
-<script setup>
-import request from '@/utils/request'
-
-request.get('/').then((res) => {
-  console.log('res', res)
-})
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>

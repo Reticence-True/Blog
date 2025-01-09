@@ -10,7 +10,6 @@
                 router
                 :default-active="$route.path"
             >
-                ·
                 <Menu :constantRoutes="userStore.menuRoutes"></Menu>
             </el-menu>
             <User></User>

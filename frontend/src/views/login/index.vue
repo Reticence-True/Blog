@@ -90,7 +90,7 @@ export default {
                 width: 50%;
                 height: 100%;
                 border-radius: inherit;
-                background: #e9e9e9;
+                background: #f9f8f8;
                 position: absolute;
             }
 
