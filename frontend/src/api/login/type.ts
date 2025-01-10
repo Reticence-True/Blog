@@ -13,5 +13,6 @@ export interface UserInfo {
 
 // 登录请求返回数据
 export interface LoginResponseData extends ResponseData {
-    data: null
+    data?: null
+    message?: string
 }

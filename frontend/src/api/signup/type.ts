@@ -19,7 +19,8 @@ export interface SignupResponseData extends ResponseData {
 
 // 存在性检查响应数据
 export interface ExistsResponseData extends ResponseData {
-    data: {
+    data?: {
         exists: boolean
     }
+    message?: string
 }

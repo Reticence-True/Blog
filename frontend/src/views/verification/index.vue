@@ -44,7 +44,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElNotification } from 'element-plus'
+import { debounce } from 'lodash'
 import { useLoginStore } from '@/store/modules/login'
 import type { SignupResponseData } from '@/api/signup/type'
 import { reqGetVerificationCode, reqVerifyAuth } from '@/api/signup'
@@ -55,6 +56,7 @@ let loginStore = useLoginStore()
 let code = ref<string>('')
 
 /* 获取验证码 */
+// 验证码倒计时秒数
 const countdown = 60
 // 倒计时秒数
 let leftSeconds = ref<number>(countdown)
@@ -69,12 +71,12 @@ let codeBtnLoading = ref<boolean>(false)
 // 验证按钮可用
 let verifyBtnIsDisabled = ref<boolean>(false)
 
-// 获取验证码
-const getCode = async () => {
+// 获取验证码，200ms 防抖
+const getCode = debounce(async () => {
     codeBtnIsDisabled.value = true
     codeBtnLoading.value = true
     let res: SignupResponseData = await reqGetVerificationCode(
-        loginStore.loginUser.email,
+        loginStore.loginUser.email as string,
     )
     codeBtnLoading.value = false
     // 获取成功
@@ -87,7 +89,7 @@ const getCode = async () => {
             message: '验证码获取失败',
         })
     }
-}
+}, 200)
 
 // 验证码按钮倒计时
 const btnCountdown = () => {
@@ -103,17 +105,17 @@ const btnCountdown = () => {
     }, 1000)
 }
 
-// 验证
-const vefifyCode = async () => {
+// 验证，200ms 防抖
+const vefifyCode = debounce(async () => {
     let { username, password, email } = loginStore.loginUser
     // 改为全大写
     let pureCode = code.value.toUpperCase()
     // 按钮不可用
     verifyBtnIsDisabled.value = true
     // 发送请求
-    let res = await reqVerifyAuth(email, pureCode)
+    let res = await reqVerifyAuth(email as string, pureCode)
     if (res.code === 200) {
-        // 自动登录(记住我)
+        // 自动登录(默认记住我)
         let loginRes = await reqLogin({ username, password, rememberMe: true })
         if (loginRes.code !== 200) {
             ElMessage({
@@ -122,8 +124,14 @@ const vefifyCode = async () => {
             })
             return
         }
+        ElNotification({
+            message: `您好，${username}`,
+            type: 'success',
+            duration: 1500,
+            showClose: false,
+        })
         // 跳转主页
-        window.location.replace('/')
+        $router.push('/')
     } else {
         ElMessage({
             type: 'error',
@@ -131,7 +139,7 @@ const vefifyCode = async () => {
         })
     }
     verifyBtnIsDisabled.value = false
-}
+}, 200)
 </script>
 
 <style scoped lang="scss">

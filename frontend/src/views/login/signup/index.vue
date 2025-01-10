@@ -38,8 +38,9 @@
                 <el-form-item>
                     <el-button
                         type="primary"
-                        :disabled="btnDisabled"
-                        :loading="btnDisabled"
+                        :disabled="loginStore.btnsDisabled"
+                        :loading="loginStore.btnsDisabled"
+                        class="login-btn"
                         @click="signupEvent"
                     >
                         注册
@@ -51,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import { debounce } from 'lodash'
 import {
     reqCheckExistsByEmail,
     reqCheckExistsByUsername,
@@ -70,8 +72,6 @@ let userInfo = reactive<UserInfo>({
     password: '123456',
     email: '3328872822@qq.com',
 })
-// 按钮禁用
-let btnDisabled = ref<boolean>(false)
 
 // 规则函数
 // 用户名
@@ -81,7 +81,7 @@ const usernameRulesFunc = async (_rule: any, val: any, callback: any) => {
 
     // 检查是否重名
     let res = await reqCheckExistsByUsername(trimVal)
-    if (res.data.exists) return callback(new Error('用户名已存在'))
+    if (res.data?.exists) return callback(new Error('用户名已存在'))
 
     callback()
 }
@@ -94,7 +94,7 @@ const emailRulesFunc = async (_rule: any, val: any, callback: any) => {
     if (!emailReg.test(trimVal)) return callback(new Error('邮箱格式不正确'))
     // 判断邮箱是否存在
     let res = await reqCheckExistsByEmail(trimVal)
-    if (res.data.exists) return callback(new Error('邮箱已存在'))
+    if (res.data?.exists) return callback(new Error('邮箱已存在'))
 
     callback()
 }
@@ -131,15 +131,14 @@ let rules: FormRules = {
     ],
 }
 
-// 注册按钮事件
-const signupEvent = async () => {
-    btnDisabled.value = true
-
+// 注册按钮事件, 200ms 防抖
+const signupEvent = debounce(async () => {
+    loginStore.setBtnsDisabled(true)
     // 校验表单
     try {
         await signupFormRef.value?.validate()
     } catch (e) {
-        btnDisabled.value = false
+        loginStore.setBtnsDisabled(false)
         return
     }
 
@@ -155,8 +154,24 @@ const signupEvent = async () => {
             message: '注册失败',
         })
     }
-    btnDisabled.value = false
+    loginStore.setBtnsDisabled(false)
+}, 200)
+
+// 清理域
+const clearFormFields = () => {
+    userInfo = {
+        username: '',
+        password: '',
+        email: '',
+    }
+    // 清理表单验证
+    signupFormRef.value?.resetFields()
 }
+
+// 暴露函数
+defineExpose({
+    clearFormFields,
+})
 </script>
 <script lang="ts">
 export default {
