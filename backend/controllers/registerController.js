@@ -2,7 +2,7 @@
 const bcryptjs = require('bcryptjs')
 const RegisterService = require('@services/registerService')
 const RedisService = require('@services/redisService')
-const sendVerificationEmail = require('@utils/sendVerificationEmail')
+const {sendVerificationEmail} = require('@utils/sendEmail')
 const varifyCodeGenerator = require('@utils/varifyCodeGenerator')
 const stringEncryption = require('@utils/stringEncryption')
 

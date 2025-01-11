@@ -32,7 +32,7 @@
                 </el-button>
             </div>
         </div>
-        <el-dialog v-model="dialogVisible" title="状态切换确认">
+        <el-dialog v-model="dialogVisible" title="状态切换确认" width="400">
             <span>切换登录或注册状态将清空当前表单数据，是否继续？</span>
             <template v-slot:footer>
                 <span class="dialog-footer">
@@ -108,7 +108,7 @@ export default {
     width: 100%;
     height: 100vh;
     background: url('@/assets/images/login_background.jpg') no-repeat center
-        fixed;
+        center fixed;
     background-size: cover;
 
     .container {

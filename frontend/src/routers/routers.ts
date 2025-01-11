@@ -1,5 +1,6 @@
 import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs'
 import { isVisible } from 'element-plus/es/utils/index.mjs'
+import path from 'path'
 
 /** 路由定义 */
 export const routes = [
@@ -18,6 +19,24 @@ export const routes = [
         component: () => import('@/views/verification/index.vue'),
         meta: {
             name: '邮箱验证',
+            isVisible: false,
+        },
+    },
+    {
+        name: 'forgetPassword',
+        path: '/forget-password',
+        component: () => import('@/views/forgetpassword/index.vue'),
+        meta: {
+            name: '忘记密码',
+            isVisible: false,
+        },
+    },
+    {
+        name: 'resetPassword',
+        path: '/reset-password',
+        component: () => import('@/views/resetpassword/index.vue'),
+        meta: {
+            name: '重置密码',
             isVisible: false,
         },
     },

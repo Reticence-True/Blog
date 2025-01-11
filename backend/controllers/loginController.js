@@ -6,10 +6,11 @@ require('dotenv').config({
             ? '.env.production'
             : '.env.development',
 })
-const moment = require('moment')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const LoginService = require('@services/loginService')
+const {sendForgetPasswordEmail} = require('@utils/sendEmail')
+const stringEncryption = require('@utils/stringEncryption')
 
 class LoginController {
     // token 有效期：1小时
@@ -49,6 +50,44 @@ class LoginController {
         } else {
             // 密码错误
             res.fail(400, '密码错误')
+        }
+    }
+
+    /**
+     * 注销登录
+     * @param {import('express').Request} req 请求参数
+     * @param {import('express').Response} res 响应参数
+     */
+    static async logout(_req, res) {
+        res.clearCookie('auth_token')
+        res.success()
+    }
+
+    // 找回密码
+    static async forgetPassword(req, res) {
+        const { email } = req.body
+        const user = await LoginService.getUserByEmail(email)
+        if (!user) {
+            return res.fail(400, '用户不存在')
+        }
+        // 生成重置密码链接
+        const findPasswordUrl = `${process.env.FRONTEND_URL}/reset-password`
+        // 发送邮件
+        await sendForgetPasswordEmail(email, findPasswordUrl)
+        res.success()
+    }
+
+    // 重置密码
+    static async resetPassword(req, res) {
+        const { email, password } = req.body
+        // 密码加密
+        const hashPwd = await stringEncryption(password)
+        // 更新密码
+        try {
+            await LoginService.updatePassword(email, hashPwd)
+            res.success()
+        } catch (e) {
+            return res.fail(500, e.message)
         }
     }
 }

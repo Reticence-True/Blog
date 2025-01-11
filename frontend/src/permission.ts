@@ -1,35 +1,21 @@
 /* 路由权限 */
 import { router } from '@/routers'
+import { pinia } from './store'
+import { useLoginStore } from './store/modules/login'
+
+const loginStore = useLoginStore(pinia)
 
 router.beforeEach((to, from, next) => {
-    // console.log(document.cookie)
-
-    // const token = document.cookie
-    //     .split(';')
-    //     .find((item) => item.trim().startsWith('auth_token='))
-    //     ?.split('=')[1]
-
-    // const token = void 0
-
-    // console.log('token', token, document.cookie)
-
-    // // 白名单直接放行
-    // if (to.meta.whiteList) {
-    //     next()
-    //     return
-    // }
-
-    // // 去 login
-    // if (to.path === '/login') {
-    //     // 带token
-    //     if (token) {
-    //         // 重定向到主页
-    //         next({ path: '/' })
-    //         return
-    //     }
-    //     // 不带token直接放行
-    // }
-
+    const forgotPasswordFlag = loginStore.forgotPasswordFlag
+    // 忘记密码页面逻辑
+    // 如果要是切换到其他页面，重置忘记密码标志
+    if (forgotPasswordFlag && to.path !== '/forget-password') {
+        loginStore.setForgotPasswordFlag(false)
+    }
+    // 如果直接访问忘记密码页面，重定向到登录页
+    if (!forgotPasswordFlag && to.path === '/forget-password') {
+        return next('/login')
+    }
     // 其余情况放行
     next()
 })

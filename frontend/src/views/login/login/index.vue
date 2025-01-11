@@ -6,7 +6,6 @@
         <div class="login-form">
             <el-form
                 label-width="80px"
-                :inline="false"
                 size="large"
                 label-position="top"
                 ref="loginFormRef"
@@ -48,15 +47,9 @@
                     </el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-link
-                        type="info"
-                        size="small"
-                        :underline="false"
-                        target="_blank"
-                        href=""
-                    >
+                    <el-button type="text" @click="forgotPwd">
                         忘记密码？
-                    </el-link>
+                    </el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -137,6 +130,14 @@ const clearFormFields = () => {
     loginFormRef.value?.resetFields()
 }
 
+// 忘记密码
+const forgotPwd = () => {
+    // 修改忘记密码标志位
+    loginStore.setForgotPasswordFlag(true)
+    // 用于页面跳转
+    $router.push('/forget-password')
+}
+
 // 暴露函数
 defineExpose({
     clearFormFields,
@@ -174,7 +175,7 @@ export default {
             height: 5rem;
         }
 
-        .el-button {
+        .login-btn {
             margin: 0 auto;
         }
     }
