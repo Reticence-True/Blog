@@ -15,4 +15,36 @@ async function encryptionFunc(string, saltRound = 10) {
     return hashString
 }
 
-module.exports = encryptionFunc
+/**
+ * 字符串比较
+ * @param {string} string 加密字符串
+ * @param {string} hashString hash字符串
+ * @returns 是否相等
+ */
+async function compareFunc(string, hashString) {
+    return await bcryptjs.compare(string, hashString)
+}
+
+/**
+ * 字符串加密为 base64
+ * @param {string} string 加密字符串
+ * @returns 加密的base64字符串
+ */
+function encryptionFuncBase64(string) {
+    return Buffer.from(string).toString('base64')
+}
+/**
+ * base64字符串解码
+ * @param {string} string 字符串
+ * @returns 解码的base64字符串
+ */
+function decryptionFuncBase64(string) {
+    return Buffer.from(string, 'base64').toString()
+}
+
+module.exports = {
+    encryptionFunc,
+    compareFunc,
+    encryptionFuncBase64,
+    decryptionFuncBase64,
+}

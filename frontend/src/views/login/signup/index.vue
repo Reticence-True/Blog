@@ -68,9 +68,9 @@ const $router = useRouter()
 const loginStore = useLoginStore()
 let signupFormRef = ref<FormInstance>()
 let userInfo = reactive<UserInfo>({
-    username: 'admin',
-    password: '123456',
-    email: '3328872822@qq.com',
+    username: '',
+    password: '',
+    email: '',
 })
 
 // 规则函数
@@ -159,11 +159,11 @@ const signupEvent = debounce(async () => {
 
 // 清理域
 const clearFormFields = () => {
-    userInfo = {
+    Object.assign(userInfo, {
         username: '',
         password: '',
         email: '',
-    }
+    })
     // 清理表单验证
     signupFormRef.value?.resetFields()
 }

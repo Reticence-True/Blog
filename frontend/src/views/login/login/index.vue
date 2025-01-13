@@ -47,7 +47,7 @@
                     </el-button>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="text" @click="forgotPwd">
+                    <el-button type="primary" link @click="forgotPwd">
                         忘记密码？
                     </el-button>
                 </el-form-item>
@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { debounce } from 'lodash'
 import { ElNotification, FormInstance, FormRules } from 'element-plus'
@@ -68,7 +68,7 @@ import { useLoginStore } from '@/store/modules/login'
 const $router = useRouter()
 const loginStore = useLoginStore()
 let rememberMe = ref<boolean>(false)
-let loginForm = ref<LoginUser>({
+let loginForm = reactive<LoginUser>({
     username: '',
     password: '',
 })
@@ -96,12 +96,12 @@ const login = debounce(async () => {
     await loginFormRef.value?.validate()
     loginStore.setBtnsDisabled(true)
     let res = await reqLogin({
-        ...loginForm.value,
+        ...loginForm,
         rememberMe: rememberMe.value,
     })
     if (res.code === 200) {
         ElNotification({
-            message: `欢迎回来，${loginForm.value.username}`,
+            message: `欢迎回来，${loginForm.username}`,
             type: 'success',
             duration: 1500,
             showClose: false,
@@ -121,10 +121,10 @@ const login = debounce(async () => {
 
 // 清理域
 const clearFormFields = () => {
-    loginForm.value = {
+    Object.assign(loginForm, {
         username: '',
         password: '',
-    }
+    })
     rememberMe.value = false
     // 清理表单验证
     loginFormRef.value?.resetFields()

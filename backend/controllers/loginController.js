@@ -6,11 +6,18 @@ require('dotenv').config({
             ? '.env.production'
             : '.env.development',
 })
-const bcryptjs = require('bcryptjs')
+
 const jwt = require('jsonwebtoken')
+const RedisService = require('@services/redisService')
 const LoginService = require('@services/loginService')
-const {sendForgetPasswordEmail} = require('@utils/sendEmail')
-const stringEncryption = require('@utils/stringEncryption')
+const { sendForgetPasswordEmail } = require('@utils/sendEmail')
+const {
+    encryptionFunc,
+    compareFunc,
+    encryptionFuncBase64,
+    decryptionFuncBase64,
+} = require('@utils/stringEncryption')
+const { formatNow } = require('@utils/customMoment')
 
 class LoginController {
     // token 有效期：1小时
@@ -31,7 +38,7 @@ class LoginController {
             return res.fail(400, '用户不存在')
         }
         // 检查密码是否正确
-        if (await bcryptjs.compare(password, dbUser.password)) {
+        if (await compareFunc(password, dbUser.password)) {
             // 生成token
             const token = jwt.sign({ ...dbUser }, process.env.SECRET_KEY, {
                 expiresIn: LoginController.#expiresIn,
@@ -70,24 +77,43 @@ class LoginController {
         if (!user) {
             return res.fail(400, '用户不存在')
         }
+        // 邮箱base64编码
+        const query = encryptionFuncBase64(
+            'eb21' +
+                formatNow('YYYY-MM-dd') +
+                '+' +
+                email +
+                '+p0rnhub' +
+                formatNow('HH:mm:ss'),
+        )
+        // 设置到redis中
+        RedisService.set('forgotPwd', email, 60 * 60) // 1h有效
         // 生成重置密码链接
         const findPasswordUrl = `${process.env.FRONTEND_URL}/reset-password`
         // 发送邮件
-        await sendForgetPasswordEmail(email, findPasswordUrl)
+        sendForgetPasswordEmail(email, findPasswordUrl, query)
         res.success()
     }
 
     // 重置密码
     static async resetPassword(req, res) {
         const { email, password } = req.body
+        // 从redis中进行邮箱比对
+        const redisEmail = await RedisService.get('forgotPwd')
+        if (email !== redisEmail) {
+            return res.fail(400, '邮箱不匹配或已过期')
+        }
         // 密码加密
-        const hashPwd = await stringEncryption(password)
+        const hashPwd = await encryptionFunc(password)
         // 更新密码
         try {
             await LoginService.updatePassword(email, hashPwd)
             res.success()
         } catch (e) {
             return res.fail(500, e.message)
+        } finally {
+            // 删除redis中的邮箱
+            RedisService.del('forgotPwd')
         }
     }
 }

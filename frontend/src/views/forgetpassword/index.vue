@@ -35,11 +35,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import { debounce } from 'lodash'
 import { reqForgotPassword } from '@/api/login'
 
+const $router = useRouter()
 let email = ref<string>('')
 const forgetFormRef = ref<FormInstance>()
 let rules: FormRules = {
@@ -74,6 +76,11 @@ const resetPassword = debounce(async () => {
     let res = await reqForgotPassword(email.value)
     if (res.code === 200) {
         ElMessage.success('找回密码邮件已发送，请查收')
+        // 2s后跳转到登录页
+        ElMessage.success('3s后跳转到登录页')
+        setTimeout(() => {
+            $router.push({ path: '/login' })
+        }, 3000)
     } else {
         ElMessage.error(res.message)
     }

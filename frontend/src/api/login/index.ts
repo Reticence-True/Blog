@@ -20,5 +20,8 @@ export const reqForgotPassword = (email: string) =>
     request.post<any, LoginResponseData>(API.FORGOT_PASSWORD_URL, { email })
 
 // 重置密码
-export const reqResetPassword = (data: { email: string; password: string }) =>
-    request.post<any, LoginResponseData>(API.RESET_PASSWORD_URL, data)
+export const reqResetPassword = (email: string, password: string) =>
+    request.post<any, LoginResponseData>(API.RESET_PASSWORD_URL, {
+        email,
+        password,
+    })

@@ -1,12 +1,13 @@
 /* 注册控制层 */
-const bcryptjs = require('bcryptjs')
 const RegisterService = require('@services/registerService')
 const RedisService = require('@services/redisService')
-const {sendVerificationEmail} = require('@utils/sendEmail')
+const { sendVerificationEmail } = require('@utils/sendEmail')
 const varifyCodeGenerator = require('@utils/varifyCodeGenerator')
-const stringEncryption = require('@utils/stringEncryption')
+const { encryptionFunc, compareFunc } = require('@utils/stringEncryption')
 
 class RegisterController {
+    static #verificationCodeExpires = 5 * 60 * 1000
+
     /**
      * 检查用户名是否已存在
      * @param {import('express').Request} req 请求参数
@@ -45,11 +46,11 @@ class RegisterController {
     static async register(req, res) {
         const { username, email, password } = req.body
         try {
-            // 存储到redis缓存
+            // 存储到redis缓存, 5分钟有效期
             await RedisService.set(
                 `user:${email}`,
                 JSON.stringify({ username, email, password }),
-                6000,
+                RegisterController.#verificationCodeExpires,
             )
             res.success()
             return
@@ -66,12 +67,18 @@ class RegisterController {
     static async getVerificationCode(req, res) {
         const { email } = req.body
         const code = varifyCodeGenerator()
-        const hashCode = await stringEncryption(code)
+        const hashCode = await encryptionFunc(code)
         try {
             // 验证用户信息是否存在
             if (await RedisService.exists(`user:${email}`)) {
-                // 设置验证码缓存
-                if (await RedisService.set(`verification:${email}`, hashCode)) {
+                // 设置验证码缓存, 5分钟有效期
+                if (
+                    await RedisService.set(
+                        `verification:${email}`,
+                        hashCode,
+                        RegisterController.#verificationCodeExpires,
+                    )
+                ) {
                     // 发送邮件
                     await sendVerificationEmail(email, code)
                     res.success()
@@ -101,10 +108,7 @@ class RegisterController {
             if (verificationCode) {
                 // 验证是否正确
                 if (
-                    !(await bcryptjs.compare(
-                        pureVerificationCode,
-                        verificationCode,
-                    ))
+                    !(await compareFunc(pureVerificationCode, verificationCode))
                 ) {
                     res.fail(400, '验证码不正确')
                     return
@@ -136,7 +140,7 @@ class RegisterController {
         if (userInfo) {
             const { username, password, email } = JSON.parse(userInfo)
             // 生成hash密码
-            const hashPwd = await stringEncryption(password)
+            const hashPwd = await encryptionFunc(password)
             try {
                 // 存储数据库
                 await RegisterService.createUser({
