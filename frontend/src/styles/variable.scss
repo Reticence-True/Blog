@@ -1,5 +1,15 @@
-/* 样式全局变量 */
+/** 样式全局变量 */
+/* 屏幕适配 16:9 */
+// 最大分辨率 4K
+$max-viewport-width: 384rem;
+$max-viewport-height: 216rem;
+// 最小分辨率 1080p
+$min-viewport-width: 128rem;
+$min-viewport-height: 54rem;
+
 /* layout */
 
 /* tabbar */
-$tabbar-base-height: 50px;
+$tabbar-base-height: 5rem;
+
+/* 主题 */

@@ -13,6 +13,6 @@ export default {
 
 <style>
 .blog {
-    font-size: 1.75rem;
+    font-size: 1.75px;
 }
 </style>

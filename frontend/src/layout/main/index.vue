@@ -11,10 +11,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.main {
-    margin-top: 1rem;
-
-    border: 1px solid #000;
-}
-</style>
+<style lang="scss" scoped></style>

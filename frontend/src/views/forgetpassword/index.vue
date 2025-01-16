@@ -90,25 +90,34 @@ const resetPassword = debounce(async () => {
 
 <style scoped lang="scss">
 .app {
-    width: 100%;
+    width: 100vw;
+    max-width: $max-viewport-width;
+    min-width: $min-viewport-width;
     height: 100vh;
-    background: url('@/assets/images/login_background.jpg') no-repeat;
+    max-height: $max-viewport-height;
+    min-height: $min-viewport-height;
+    background: url('@/assets/images/login_background.jpg') no-repeat center
+        center;
     background-size: cover;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 
     .container {
         width: 40%;
+        max-width: $max-viewport-width * 0.4;
+        min-width: $min-viewport-width * 0.4;
         height: 30%;
-        border-radius: 12px;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-        border: 1px solid #fff;
+        max-height: $max-viewport-height * 0.3;
+        min-height: $min-viewport-height * 0.3;
+        border-radius: 1.2rem;
+        box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+        border: 0.1rem solid #fff;
         background-color: #f9f8f8;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        padding: 30px;
+        padding: 3rem;
 
         .forget-form {
             height: 100%;

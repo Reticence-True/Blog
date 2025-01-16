@@ -12,13 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { useUserStore } from '@/store/modules/user'
 import Tabbar from './tabbar/index.vue'
 import Main from './main/index.vue'
-
-const $route = useRoute()
-const userStore = useUserStore()
 </script>
 
 <style lang="scss" scoped>
@@ -34,14 +29,11 @@ const userStore = useUserStore()
     }
 
     .layout-main {
-        .scrollbar {
-            width: 80%;
-            height: calc(100% - $tabbar-base-height);
-            position: absolute;
-            top: $tabbar-base-height;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+        width: 100%;
+        height: calc(100vh - $tabbar-base-height);
+        position: absolute;
+        top: $tabbar-base-height;
+        left: 0;
     }
 }
 </style>

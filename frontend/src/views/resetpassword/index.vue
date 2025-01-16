@@ -71,7 +71,7 @@ let rules: FormRules = {
     confirmPassword: [
         { required: true, message: '请再次输入新密码', trigger: 'blur' },
         {
-            validator: (rule, value, callback) => {
+            validator: (_rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入新密码'))
                 } else if (value !== resetPwd.password) {
@@ -110,33 +110,38 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .app {
-    width: 100%;
+    width: 100vw;
+    max-width: $max-viewport-width;
+    min-width: $min-viewport-width;
     height: 100vh;
-    background: url('@/assets/images/login_background.jpg') no-repeat;
+    max-height: $max-viewport-height;
+    min-height: $min-viewport-height;
+    background: url('@/assets/images/login_background.jpg') no-repeat center
+        center;
     background-size: cover;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 
     .container {
         width: 40%;
         height: 35%;
-        border-radius: 12px;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-        border: 1px solid #fff;
+        border-radius: 1.2rem;
+        box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+        border: 0.1rem solid #fff;
         background-color: #f9f8f8;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        padding: 30px;
+        padding: 4rem;
 
         .reset-form {
             height: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             flex-direction: column;
             align-items: center;
-            margin-top: 2rem;
+            padding-top: 4.5rem;
 
             .reset-btn {
                 margin: 0 auto;

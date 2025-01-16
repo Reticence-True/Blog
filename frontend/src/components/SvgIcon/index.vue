@@ -11,25 +11,25 @@ defineProps({
     // xlink:href属性值的前缀
     prefix: {
         type: String,
-        default: '#icon-'
+        default: '#icon-',
     },
     // svg矢量图名字
     name: String,
     // svg图标颜色
     color: {
         type: String,
-        default: ''
+        default: '',
     },
     // svg图标宽度
     width: {
         type: String,
-        default: '16px'
+        default: '16px',
     },
     // svg图标高度
     height: {
         type: String,
-        default: '16px'
-    }
+        default: '16px',
+    },
 })
 </script>
 

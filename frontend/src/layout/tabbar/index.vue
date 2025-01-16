@@ -41,7 +41,7 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 0.3rem 0.3rem 0 #bfbfbf;
+    box-shadow: 0 0.3px 0.3px 0 #bfbfbf;
 
     .tabbar-left {
         // background: orangered;

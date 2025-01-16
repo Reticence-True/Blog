@@ -1,56 +1,60 @@
 <template>
-    <div class="app">
-        <div class="container">
-            <div class="form-page" ref="formPage">
-                <div class="left-login">
-                    <Login ref="loginRef"></Login>
+    <div>
+        <div class="app">
+            <div class="container">
+                <div class="form-page" ref="formPage">
+                    <div class="left-login">
+                        <Login ref="loginRef"></Login>
+                    </div>
+                    <div class="right-signup">
+                        <Signup ref="signupRef"></Signup>
+                    </div>
                 </div>
-                <div class="right-signup">
-                    <Signup ref="signupRef"></Signup>
-                </div>
-            </div>
-            <div class="switch-btn-page" ref="btnPage">
-                <el-button
-                    type="primary"
-                    size="large"
-                    class="switch-2-signup login-btn"
-                    :disabled="loginStore.btnsDisabled"
-                    :loading="loginStore.btnsDisabled"
-                    @click="dialogVisible = true"
-                >
-                    Sign up 注册
-                </el-button>
-                <el-button
-                    type="primary"
-                    size="large"
-                    class="switch-2-login login-btn"
-                    :disabled="loginStore.btnsDisabled"
-                    :loading="loginStore.btnsDisabled"
-                    @click="dialogVisible = true"
-                >
-                    Log in 登录
-                </el-button>
-            </div>
-        </div>
-        <el-dialog v-model="dialogVisible" title="状态切换确认" width="400">
-            <span>切换登录或注册状态将清空当前表单数据，是否继续？</span>
-            <template v-slot:footer>
-                <span class="dialog-footer">
-                    <el-button @click="dialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="submitChange">
-                        确定
+                <div class="switch-btn-page" ref="btnPage">
+                    <el-button
+                        type="primary"
+                        size="large"
+                        class="switch-2-signup login-btn"
+                        :disabled="loginStore.btnsDisabled"
+                        :loading="loginStore.btnsDisabled"
+                        @click="dialogVisible = true"
+                    >
+                        Sign up 注册
                     </el-button>
-                </span>
-            </template>
-        </el-dialog>
+                    <el-button
+                        type="primary"
+                        size="large"
+                        class="switch-2-login login-btn"
+                        :disabled="loginStore.btnsDisabled"
+                        :loading="loginStore.btnsDisabled"
+                        @click="dialogVisible = true"
+                    >
+                        Log in 登录
+                    </el-button>
+                </div>
+            </div>
+            <el-dialog v-model="dialogVisible" title="状态切换确认" width="400">
+                <span>切换登录或注册状态将清空当前表单数据，是否继续？</span>
+                <template v-slot:footer>
+                    <span class="dialog-footer">
+                        <el-button @click="dialogVisible = false">
+                            取消
+                        </el-button>
+                        <el-button type="primary" @click="submitChange">
+                            确定
+                        </el-button>
+                    </span>
+                </template>
+            </el-dialog>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLoginStore } from '@/store/modules/login'
-import Login from './login'
-import Signup from './signup'
+import Login from './login/index.vue'
+import Signup from './signup/index.vue'
 
 const loginStore = useLoginStore()
 let formPage: any, btnPage: any
@@ -105,24 +109,32 @@ export default {
 
 <style scoped lang="scss">
 .app {
-    width: 100%;
+    width: 100vw;
+    max-width: $max-viewport-width;
+    min-width: $min-viewport-width;
     height: 100vh;
+    max-height: $max-viewport-height;
+    min-height: $min-viewport-height;
     background: url('@/assets/images/login_background.jpg') no-repeat center
-        center fixed;
+        center;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .container {
-        width: 90%;
+        width: 80%;
+        max-width: $max-viewport-width * 0.8;
+        min-width: $min-viewport-width * 0.8;
         height: 90%;
-        border: 1px solid #fff;
-        border-radius: 20px;
+        max-height: $max-viewport-height * 0.9;
+        min-height: $min-viewport-height * 0.9;
+        border: 0.1rem solid #fff;
+        border-radius: 2rem;
         text-align: center;
-        position: relative;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        box-shadow: 3.5px 3.5px 1.5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0.35rem 0.35rem 0.15rem rgba(0, 0, 0, 0.3);
         overflow: hidden;
+        position: relative;
 
         .form-page {
             width: 100%;
@@ -158,19 +170,22 @@ export default {
         }
 
         .switch-btn-page {
+            height: 10%;
             transform: translateX(0);
             transition: all 500ms;
 
             .switch-2-signup {
                 position: absolute;
-                top: 28rem;
-                left: 26.5rem;
+                top: 450%;
+                left: 25%;
+                transform: translate(-50%, -50%);
             }
 
             .switch-2-login {
                 position: absolute;
-                top: 28rem;
-                left: calc(100% + 26.5rem);
+                top: 450%;
+                right: -25%;
+                transform: translate(50%, -50%);
             }
         }
     }

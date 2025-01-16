@@ -48,6 +48,6 @@ export default {
 <style scoped lang="scss">
 .el-menu-item {
     font-family: 'Alibaba PuHuiTi';
-    font-size: 1.5rem;
+    font-size: 1.5px;
 }
 </style>

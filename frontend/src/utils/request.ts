@@ -25,7 +25,6 @@ request.interceptors.response.use(
     },
     (error) => {
         // 失败的回调
-        // console.log('error', error)
         let message = ''
         const statusCode = error.response.code
 

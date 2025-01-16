@@ -16,8 +16,8 @@ export default {
 .user {
     display: flex;
     align-items: center;
-    margin-left: 1rem;
-    font-size: 1.5rem;
+    margin-left: 1px;
+    font-size: 1.5px;
 
     img {
         border-radius: 50%;

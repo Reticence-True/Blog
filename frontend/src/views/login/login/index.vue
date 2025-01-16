@@ -5,7 +5,7 @@
         </div>
         <div class="login-form">
             <el-form
-                label-width="80px"
+                label-width="80rem"
                 size="large"
                 label-position="top"
                 ref="loginFormRef"

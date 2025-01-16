@@ -7,8 +7,14 @@
                 </template>
             </el-page-header>
             <div class="verification-form">
-                <el-form inline style="display: block">
-                    <el-form-item>
+                <el-form
+                    inline
+                    style="display: block"
+                    :rules="rules"
+                    :model="{ code }"
+                    ref="codeFormRef"
+                >
+                    <el-form-item prop="code">
                         <el-input
                             placeholder="请输入邮箱验证码"
                             v-model="code"
@@ -31,7 +37,7 @@
                 type="primary"
                 size="large"
                 class="verification"
-                :disabled="!(code || verifyBtnIsDisabled)"
+                :disabled="!(code.length === 6 || verifyBtnIsDisabled)"
                 :loading="verifyBtnIsDisabled"
                 @click="vefifyCode"
             >
@@ -44,7 +50,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElNotification } from 'element-plus'
+import {
+    ElMessage,
+    ElNotification,
+    type FormInstance,
+    type FormRules,
+} from 'element-plus'
 import { debounce } from 'lodash'
 import { useLoginStore } from '@/store/modules/login'
 import type { SignupResponseData } from '@/api/signup/type'
@@ -70,6 +81,22 @@ let codeBtnLoading = ref<boolean>(false)
 /* 验证 */
 // 验证按钮可用
 let verifyBtnIsDisabled = ref<boolean>(false)
+
+/* 校验规则 */
+const codeFormRef = ref<FormInstance>()
+const rules: FormRules = {
+    code: [
+        {
+            validator: (_rules: any, val: string, callback: any) => {
+                if (val.length > 6) {
+                    code.value = val.slice(0, 6)
+                }
+                callback()
+            },
+            trigger: 'change',
+        },
+    ],
+}
 
 // 获取验证码，200ms 防抖
 const getCode = debounce(async () => {
@@ -144,25 +171,30 @@ const vefifyCode = debounce(async () => {
 
 <style scoped lang="scss">
 .app {
-    width: 100%;
+    width: 100vw;
+    max-width: $max-viewport-width;
+    min-width: $min-viewport-width;
     height: 100vh;
-    background: url('@/assets/images/login_background.jpg') no-repeat;
+    max-height: $max-viewport-height;
+    min-height: $min-viewport-height;
+    background: url('@/assets/images/login_background.jpg') no-repeat center
+        center;
     background-size: cover;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 
     .container {
         width: 45%;
         height: 40%;
-        border-radius: 12px;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-        border: 1px solid #fff;
+        border-radius: 1.2rem;
+        box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+        border: 0.1rem solid #fff;
         background-color: #f9f8f8;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        padding: 30px;
+        padding: 3rem;
 
         .verification-form {
             height: 100%;
