@@ -12,4 +12,28 @@ $min-viewport-height: 54rem;
 /* tabbar */
 $tabbar-base-height: 5rem;
 
+/* main */
+// 主题区部分
+$header-height: 21rem;
+
 /* 主题 */
+// 春季主题配色
+$spring-primary-0: #c4e4b2;
+$spring-primary-100: #6ebd44;
+$spring-primary-200: #509f26;
+$spring-primary-300: #005e00;
+$spring-accent-100: #ffd700;
+$spring-accent-200: #917800;
+
+// 全局使用的主题配色
+$text-100: #333333;
+$text-200: #5c5c5c;
+$background-100: #f9f8f8;
+$background-200: #efeeee;
+$background-300: #c6c5c5;
+$primary-0: $spring-primary-0;
+$primary-100: $spring-primary-100;
+$primary-200: $spring-primary-200;
+$primary-300: $spring-primary-300;
+$accent-100: $spring-accent-100;
+$accent-200: $spring-accent-200;

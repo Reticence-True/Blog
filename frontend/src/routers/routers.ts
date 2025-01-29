@@ -142,6 +142,26 @@ export const routes = [
         ],
     },
     {
+        name: 'indexAdmin',
+        path: '/',
+        component: () => import('@/layout/index.vue'),
+        meta: {
+            name: '管理员框架',
+            isVisiable: false,
+        },
+        children: [
+            {
+                name: 'admin',
+                path: '/admin',
+                component: () => import('@/views/admin/index.vue'),
+                meta: {
+                    name: '管理员',
+                    isVisiable: true,
+                },
+            },
+        ],
+    },
+    {
         name: '404',
         path: '/404',
         component: () => import('@/views/404/index.vue'),

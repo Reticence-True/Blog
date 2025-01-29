@@ -39,18 +39,20 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0.3px 0.3px 0 #bfbfbf;
+    background-color: $background-100;
+    border: 1px solid $background-300;
 
     .tabbar-left {
-        // background: orangered;
+        margin-left: 12rem;
     }
 
     .tabbar-right {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-right: 15rem;
 
         .route-menu {
             height: $tabbar-base-height;

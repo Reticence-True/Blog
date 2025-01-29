@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 // element-plus
 import ElementPlus from 'element-plus'
-// @ts-expect-error
+// @ts-expect-error elementplus i18n
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 // svg插件

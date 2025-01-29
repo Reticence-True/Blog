@@ -4,7 +4,7 @@
             <Tabbar></Tabbar>
         </div>
         <div class="layout-main">
-            <el-scrollbar class="scrollbar">
+            <el-scrollbar>
                 <Main></Main>
             </el-scrollbar>
         </div>
@@ -18,10 +18,12 @@ import Main from './main/index.vue'
 
 <style lang="scss" scoped>
 .layout {
-    width: 100%;
+    width: 100vw;
+    min-width: $min-viewport-width;
 
     .layout-tabbar {
         width: 100%;
+        min-width: $min-viewport-width;
         height: $tabbar-base-height;
         position: absolute;
         top: 0;
@@ -30,6 +32,7 @@ import Main from './main/index.vue'
 
     .layout-main {
         width: 100%;
+        min-width: $min-viewport-width;
         height: calc(100vh - $tabbar-base-height);
         position: absolute;
         top: $tabbar-base-height;

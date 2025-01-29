@@ -190,7 +190,7 @@ const vefifyCode = debounce(async () => {
         border-radius: 1.2rem;
         box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
         border: 0.1rem solid #fff;
-        background-color: #f9f8f8;
+        background-color: $background-100;
         display: flex;
         justify-content: space-around;
         flex-direction: column;

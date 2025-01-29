@@ -12,15 +12,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .user {
     display: flex;
     align-items: center;
-    margin-left: 1px;
-    font-size: 1.5px;
+    font-size: 1.6rem;
+    margin-left: 4.5rem;
 
-    img {
+    .avatar {
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
+        margin-right: 1rem;
+        border: 1px solid $text-100;
     }
 }
 </style>

@@ -150,7 +150,7 @@ export default {
                 width: 50%;
                 height: 100%;
                 border-radius: inherit;
-                background: #f9f8f8;
+                background: $background-100;
                 position: absolute;
             }
 

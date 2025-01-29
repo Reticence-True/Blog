@@ -47,7 +47,7 @@ export default {
 
 <style scoped lang="scss">
 .el-menu-item {
-    font-family: 'Alibaba PuHuiTi';
-    font-size: 1.5px;
+    font-size: 1.6rem;
+    background-color: $background-100;
 }
 </style>
