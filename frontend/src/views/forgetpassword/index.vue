@@ -49,7 +49,7 @@ let rules: FormRules = {
     email: [
         {
             required: true,
-            validator: (rules: any, val: any, callback: any) => {
+            validator: (_rules: any, val: any, callback: any) => {
                 console.log(val)
                 if (!val) {
                     return callback(new Error('请输入邮箱'))

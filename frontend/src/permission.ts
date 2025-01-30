@@ -5,7 +5,7 @@ import { useLoginStore } from './store/modules/login'
 
 const loginStore = useLoginStore(pinia)
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
     const forgotPasswordFlag = loginStore.forgotPasswordFlag
     // 忘记密码页面逻辑
     // 如果要是切换到其他页面，重置忘记密码标志

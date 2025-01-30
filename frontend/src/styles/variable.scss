@@ -17,11 +17,15 @@ $tabbar-base-height: 5rem;
 $header-height: 21rem;
 
 /* 主题 */
+
 // 春季主题配色
-$spring-primary-0: #c4e4b2;
-$spring-primary-100: #6ebd44;
-$spring-primary-200: #509f26;
-$spring-primary-300: #005e00;
+$spring-primary-0: #C4E4B2;
+$spring-primary-100: #b0f29e;
+$spring-primary-200: #96e780;
+$spring-primary-300: #7dcf62;
+$spring-primary-400: #66b744;
+$spring-primary: #509f26;
+$spring-primary-600: #005e00;
 $spring-accent-100: #ffd700;
 $spring-accent-200: #917800;
 
@@ -35,5 +39,26 @@ $primary-0: $spring-primary-0;
 $primary-100: $spring-primary-100;
 $primary-200: $spring-primary-200;
 $primary-300: $spring-primary-300;
+$primary-400: $spring-primary-400;
+$primary: $spring-primary;
+$primary-600: $spring-primary-600;
 $accent-100: $spring-accent-100;
 $accent-200: $spring-accent-200;
+
+// 公共css变量
+:root {
+    --text-100: #{$text-100};
+    --text-200: #{$text-200};
+    --background-100: #{$background-100};
+    --background-200: #{$background-200};
+    --background-300: #{$background-300};
+    --primary-0: #{$primary-0};
+    --primary-100: #{$primary-100};
+    --primary-200: #{$primary-200};
+    --primary-300: #{$primary-300};
+    --primary-400: #{$primary-400};
+    --primary: #{$primary};
+    --primary-600: #{$primary-600};
+    --accent-100: #{$accent-100};
+    --accent-200: #{$accent-200};
+}

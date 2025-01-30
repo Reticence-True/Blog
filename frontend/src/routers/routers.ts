@@ -1,7 +1,3 @@
-import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs'
-import { isVisible } from 'element-plus/es/utils/index.mjs'
-import path from 'path'
-
 /** 路由定义 */
 export const routes = [
     {

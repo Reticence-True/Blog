@@ -42,8 +42,6 @@ import { toInteger } from 'lodash'
 import * as echarts from 'echarts'
 import getScssVariable from '@/utils/getScssVariable'
 
-console.log(getScssVariable('$text-100'))
-
 const bodyContainerRef = ref<HTMLElement>() // 容器Ref
 // 文章部分ref
 const essayItemsRef = ref<CardInstance[]>([]) // 文章项
@@ -109,7 +107,7 @@ const observeBottomContainerHeight = () => {
  * 流量图表
  */
 const createFlowCharts = () => {
-    const chartFontSize = '1.2rem' // 图表全局字体样式
+    const chartFontSize = '1.2rem' // 图表全局字体大小
     customerFLowChart = echarts.init(customerFLowChartRef.value)
     customerFLowChart.setOption({
         grid: {
@@ -150,7 +148,7 @@ const createFlowCharts = () => {
             ],
             axisLabel: {
                 fontSize: chartFontSize,
-                color: text100,
+                color: getScssVariable('$text-100'),
                 fontFamily: 'AlibabaPuHuiTi',
             },
         },
@@ -162,7 +160,7 @@ const createFlowCharts = () => {
                 },
                 axisLabel: {
                     fontSize: chartFontSize,
-                    color: '$text-100',
+                    color: getScssVariable('$text-100'),
                     fontFamily: 'AlibabaPuHuiTi',
                     formatter: '{value}人',
                 },
@@ -174,7 +172,7 @@ const createFlowCharts = () => {
                 },
                 axisLabel: {
                     fontSize: chartFontSize,
-                    color: '$text-100',
+                    color: getScssVariable('$text-100'),
                     fontFamily: 'AlibabaPuHuiTi',
                     formatter: '{value}%',
                 },
@@ -184,11 +182,6 @@ const createFlowCharts = () => {
             {
                 name: '今日到访',
                 type: 'bar',
-                label: {
-                    show: true,
-                    color: '$text-100',
-                    position: 'top',
-                },
                 // data: [200, 400, 150, 200, 500, 600, 550],
                 tooltip: {
                     valueFormatter(value: number) {
@@ -205,11 +198,11 @@ const createFlowCharts = () => {
                         colorStops: [
                             {
                                 offset: 0,
-                                color: 'accent-10068',
+                                color: getScssVariable('$accent-100') + '50',
                             },
                             {
                                 offset: 1,
-                                color: 'accent-10068',
+                                color: getScssVariable('$accent-100') + '50',
                             },
                         ],
                     },
@@ -231,10 +224,10 @@ const createFlowCharts = () => {
                 symbolSize: 14,
                 lineStyle: {
                     width: 4,
-                    color: '$primary-100',
+                    color: getScssVariable('$primary-400'),
                 },
                 itemStyle: {
-                    color: 'accent-100',
+                    color: getScssVariable('$accent-100'),
                     borderWidth: 2,
                     borderColor: '#fff',
                 },
@@ -245,6 +238,7 @@ const createFlowCharts = () => {
         timeline: {
             axisType: 'category',
             autoPlay: true,
+            playInterval: 10000,
             data: [
                 '2025年1月第1周',
                 '2025年1月第2周',
@@ -256,27 +250,27 @@ const createFlowCharts = () => {
                 '2025年2月第4周',
             ],
             // 背景按钮
-            itemStyle: { color: 'primary-0' },
+            itemStyle: { color: getScssVariable('$primary-0') },
             // 选中的按钮
-            checkpointStyle: { color: 'primary-300' },
+            checkpointStyle: { color: getScssVariable('$primary-600') },
             // 背景线段
-            lineStyle: { color: 'primary-0' },
+            lineStyle: { color: getScssVariable('$primary-0') },
             // 未选中文字
-            label: { color: 'primary-0' },
+            label: { color: getScssVariable('$primary-400') },
             // 控制按钮：播放，下一个和前一个
-            controlStyle: { color: 'primary-0' },
+            controlStyle: { color: getScssVariable('$primary-400') },
             // 走过的线段/选中按钮/背景按钮的样式
             progress: {
-                lineStyle: { color: '$primary-100' },
-                itemStyle: { color: '$primary-100' },
-                label: { color: '$primary-100' },
+                lineStyle: { color: getScssVariable('$primary-400') },
+                itemStyle: { color: getScssVariable('$primary-400') },
+                label: { color: getScssVariable('$primary-600') },
             },
             // 鼠标悬停的线段/选中按钮/背景按钮的样式
             emphasis: {
-                checkpointStyle: { color: '$primary-100' },
-                itemStyle: { color: '$primary-100' },
-                label: { color: '$primary-100' },
-                controlStyle: { color: '$primary-100' },
+                checkpointStyle: { color: getScssVariable('$primary-400') },
+                itemStyle: { color: getScssVariable('$primary-400') },
+                label: { color: getScssVariable('$primary-600') },
+                controlStyle: { color: getScssVariable('$primary-400') },
             },
             bottom: 0,
             padding: [5, 0, 0, 0],
@@ -388,8 +382,8 @@ export default {
             flex: 5;
             background: linear-gradient(
                 to right bottom,
-                $primary-100,
-                $primary-200
+                $primary-300,
+                $primary
             );
             display: flex;
             justify-content: space-evenly;
@@ -398,7 +392,7 @@ export default {
 
             span {
                 font-size: 2rem;
-                color: $primary-300;
+                color: $primary-600;
             }
         }
     }

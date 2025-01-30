@@ -3,7 +3,6 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 // @ts-expect-error elementplus i18n
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import 'element-plus/dist/index.css'
 // svg插件
 import 'virtual:svg-icons-register'
 // pinia仓库
@@ -12,6 +11,10 @@ import { pinia } from '@/store'
 import globalComponent from '@/components/index.ts'
 // 模板的全局样式
 import '@/styles/index.scss'
+// 替换 element-plus 样式
+import '@/styles/element/index.ts'
+// element-plus css
+import 'element-plus/dist/index.css'
 // 路由
 import { router } from '@/routers/index.ts'
 import './permission'

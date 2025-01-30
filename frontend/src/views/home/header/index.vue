@@ -42,7 +42,7 @@ export default {
 
         p {
             font-size: 7rem;
-            color: $primary-200;
+            color: $primary;
             font-weight: bold;
         }
     }
