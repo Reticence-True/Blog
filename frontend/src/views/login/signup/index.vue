@@ -52,20 +52,22 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from 'lodash'
+import { debounce, cloneDeep } from 'lodash'
 import {
     reqCheckExistsByEmail,
     reqCheckExistsByUsername,
     reqSignUp,
 } from '@/api/signup'
-import { UserInfo } from '@/api/signup/type'
-import { useLoginStore } from '@/store/modules/login'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { UserInfo } from '@/store/modules/type/user'
+import { useLoginStore } from '@/store/modules/login'
+import { useUserStore } from '@/store/modules/user'
 
 const $router = useRouter()
 const loginStore = useLoginStore()
+const userStore = useUserStore()
 let signupFormRef = ref<FormInstance>()
 let userInfo = reactive<UserInfo>({
     username: '',
@@ -141,12 +143,13 @@ const signupEvent = debounce(async () => {
         loginStore.setBtnsDisabled(false)
         return
     }
-
     // 表单通过
-    Object.assign(loginStore.loginUser, JSON.parse(JSON.stringify(userInfo)))
     // 发送注册请求
     let res = await reqSignUp(userInfo)
     if (res.code === 200) {
+        Object.assign(userStore.userInfo, cloneDeep(userInfo))
+        // 清空密码
+        userStore.clearUserPassword()
         $router.push('/email-verification')
     } else {
         ElMessage({

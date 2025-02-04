@@ -15,6 +15,10 @@ enum API {
 export const reqLogin = (user: UserInfo) =>
     request.post<any, LoginResponseData>(API.LOGIN_URL, user)
 
+// 注销
+export const reqLogout = () =>
+    request.delete<any, LoginResponseData>(API.LOGIN_URL)
+
 // 忘记密码
 export const reqForgotPassword = (email: string) =>
     request.post<any, LoginResponseData>(API.FORGOT_PASSWORD_URL, { email })

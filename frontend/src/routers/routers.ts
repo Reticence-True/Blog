@@ -7,6 +7,7 @@ export const routes = [
         meta: {
             name: '登录',
             isVisible: false,
+            status: 'login',
         },
     },
     {
@@ -16,6 +17,7 @@ export const routes = [
         meta: {
             name: '邮箱验证',
             isVisible: false,
+            status: 'login',
         },
     },
     {
@@ -25,6 +27,7 @@ export const routes = [
         meta: {
             name: '忘记密码',
             isVisible: false,
+            status: 'login',
         },
     },
     {
@@ -34,6 +37,7 @@ export const routes = [
         meta: {
             name: '重置密码',
             isVisible: false,
+            status: 'login',
         },
     },
     {
@@ -53,6 +57,7 @@ export const routes = [
                 meta: {
                     name: '主页',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -73,6 +78,7 @@ export const routes = [
                 meta: {
                     name: '帖子',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -93,6 +99,7 @@ export const routes = [
                 meta: {
                     name: '留言板',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -113,6 +120,7 @@ export const routes = [
                 meta: {
                     name: '友链',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -133,6 +141,7 @@ export const routes = [
                 meta: {
                     name: '关于',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -153,6 +162,7 @@ export const routes = [
                 meta: {
                     name: '管理员',
                     isVisiable: true,
+                    status: 'constant',
                 },
             },
         ],
@@ -164,6 +174,7 @@ export const routes = [
         meta: {
             name: '404',
             isVisiable: false,
+            status: '404',
         },
     },
     {
@@ -173,6 +184,7 @@ export const routes = [
         meta: {
             name: 'any',
             isVisiable: false,
+            status: 'any',
         },
     },
 ]

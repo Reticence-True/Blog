@@ -59,16 +59,18 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { debounce } from 'lodash'
+import { debounce, cloneDeep } from 'lodash'
 import { ElNotification, FormInstance, FormRules } from 'element-plus'
 import { reqLogin } from '@/api/login'
-import { LoginUser } from '@/store/modules/type/login'
+import type { UserInfo } from '@/store/modules/type/user'
 import { useLoginStore } from '@/store/modules/login'
+import { useUserStore } from '@/store/modules/user'
 
 const $router = useRouter()
 const loginStore = useLoginStore()
+const userStore = useUserStore()
 let rememberMe = ref<boolean>(false)
-let loginForm = reactive<LoginUser>({
+let loginForm = reactive<UserInfo>({
     username: '',
     password: '',
 })
@@ -96,16 +98,21 @@ const login = debounce(async () => {
     await loginFormRef.value?.validate()
     loginStore.setBtnsDisabled(true)
     let res = await reqLogin({
-        ...loginForm,
         rememberMe: rememberMe.value,
+        username: loginForm.username,
+        password: loginForm.password as string,
     })
     if (res.code === 200) {
+        // 存储用户信息
+        Object.assign(userStore.userInfo, cloneDeep(loginForm))
         ElNotification({
-            message: `欢迎回来，${loginForm.username}`,
+            message: `欢迎回来，${userStore.userInfo.username}`,
             type: 'success',
             duration: 1500,
             showClose: false,
         })
+        // 清理密码
+        userStore.clearUserPassword()
         // 跳转到首页
         $router.push('/')
     } else {

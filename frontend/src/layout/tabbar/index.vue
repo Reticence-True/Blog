@@ -43,6 +43,7 @@ export default {
     align-items: center;
     background-color: $background-100;
     border: 1px solid $background-300;
+    overflow: hidden;
 
     .tabbar-left {
         margin-left: 12rem;

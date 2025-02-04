@@ -198,11 +198,11 @@ const createFlowCharts = () => {
                         colorStops: [
                             {
                                 offset: 0,
-                                color: getScssVariable('$accent-100') + '50',
+                                color: getScssVariable('$accent-100') + '60',
                             },
                             {
                                 offset: 1,
-                                color: getScssVariable('$accent-100') + '50',
+                                color: getScssVariable('$accent-100') + '60',
                             },
                         ],
                     },

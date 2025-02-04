@@ -15,7 +15,6 @@ const {
     encryptionFunc,
     compareFunc,
     encryptionFuncBase64,
-    decryptionFuncBase64,
 } = require('@utils/stringEncryption')
 const { formatNow } = require('@utils/customMoment')
 
@@ -50,7 +49,7 @@ class LoginController {
                 sameSite: 'strict',
                 // 如果设置 rememberMe，则设置具体的cookie过期时间，否则只是一次session
                 ...(rememberMe && {
-                    max_age: LoginController.#cookieExpires, // 10天后过期
+                    maxAge: LoginController.#cookieExpires, // 10天后过期
                 }),
             })
             res.success()

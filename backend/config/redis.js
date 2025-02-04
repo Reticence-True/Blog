@@ -14,8 +14,7 @@ const redisClient = new Redis({
     password: process.env.REDIS_PASSWORD,
     // 自动重连配置
     retryStrategy(times) {
-        const delay = Math.min(times * 50, 2000)
-        return delay
+        return Math.min(times * 50, 2000)
     },
 })
 

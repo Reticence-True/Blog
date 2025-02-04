@@ -8,8 +8,8 @@ export interface ResponseData {
 // 用户数据
 export interface UserInfo {
     username: string
-    password: string
-    email: string
+    password?: string
+    email?: string
 }
 
 // 注册响应数据

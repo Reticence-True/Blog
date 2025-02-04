@@ -10,6 +10,7 @@ const responseMiddleware = require('@middleware/responseMiddleware')
 const registerRouter = require('@routes/register')
 const loginRouter = require('@routes/login')
 const roleRouter = require('@routes/role')
+const userRouter = require('@routes/user')
 
 const app = express()
 const host = process.env.HOST || 'localhost'
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use('/register', registerRouter)
 app.use('/login', loginRouter)
 app.use('/role', roleRouter)
+app.use('/user', userRouter)
 
 // 页面不存在
 app.use((req, res) => {
