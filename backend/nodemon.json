@@ -2,10 +2,10 @@
   "restartable": "rs",
   "ignore": [".git", ".svn", "node_modules/**/node_modules"],
   "verbose": true,
-  "exec": "node app.js",
+  "exec": "ts-node app.ts",
   "watch": ["./"],
   "env": {
     "NODE_ENV": "development"
   },
-  "ext": ".js, .json"
+  "ext": ".ts, .json"
 }

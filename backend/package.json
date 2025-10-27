@@ -1,45 +1,77 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "cross-env NODE_ENV=development nodemon"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "body-parser": "^1.20.3",
-        "cookie-parser": "^1.4.7",
-        "cors": "^2.8.5",
-        "crypto": "^1.0.1",
-        "dotenv": "^16.4.7",
-        "express": "^4.21.2",
-        "ioredis": "^5.4.2",
-        "jsonwebtoken": "^9.0.2",
-        "module-alias": "^2.2.3",
-        "moment": "^2.30.1",
-        "mongodb": "^6.12.0",
-        "mongoose": "^8.9.3",
-        "nodemailer": "^6.9.16",
-        "redis": "^4.7.0"
-    },
-    "devDependencies": {
-        "cross-env": "^7.0.3",
-        "eslint": "^8.47.0",
-        "nodemon": "^3.1.9",
-        "prettier": "^3.4.2"
-    },
-    "_moduleAliases": {
-        "@controllers": "./controllers",
-        "@services": "./services",
-        "@models": "./models",
-        "@routes": "./routes",
-        "@utils": "./utils",
-        "@middleware": "./middleware",
-        "@config": "./config"
-    }
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/Reticence-True/Blog#readme",
+  "bugs": {
+    "url": "https://github.com/Reticence-True/Blog/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reticence-True/Blog.git"
+  },
+  "funding": "https://github.com/sponsors/Reticence-True",
+  "license": "ISC",
+  "author": "",
+  "main": "app.ts",
+  "scripts": {
+    "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
+    "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
+    "start": "pnpm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prettier": "prettier-config-ali",
+  "stylelint": {
+    "extends": [
+      "stylelint-config-ali",
+      "stylelint-prettier/recommended"
+    ]
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "moment": "^2.30.1",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.3",
+    "nodemailer": "^6.9.16",
+    "redis": "^4.7.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.4",
+    "@types/node": "^24.9.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.38.0",
+    "eslint-config-ali": "^16.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.6.2",
+    "prettier-config-ali": "^1.5.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-ali": "^2.3.0",
+    "stylelint-prettier": "^5.0.3",
+    "typescript": "^5.9.3"
+  },
+  "_moduleAliases": {
+    "@controllers": "./controllers",
+    "@services": "./services",
+    "@models": "./models",
+    "@routes": "./routes",
+    "@utils": "./utils",
+    "@middleware": "./middleware",
+    "@config": "./config",
+    "@types": "./types"
+  }
 }

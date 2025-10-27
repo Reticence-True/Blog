@@ -1,16 +1,38 @@
 {
   "name": "myblog",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "homepage": "https://github.com/Reticence-True/Blog#readme",
+  "bugs": {
+    "url": "https://github.com/Reticence-True/Blog/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reticence-True/Blog.git"
+  },
+  "funding": "https://github.com/sponsors/Reticence-True",
+  "author": {
+    "name": "Reticence-True",
+    "email": "1219380015@qq.com"
+  },
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
-    "start": "pnpm run dev",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "build:test": "vue-tsc && vite build --mode test",
     "build:pro": "vue-tsc && vite build --mode production",
-    "lint": "npx eslint"
+    "build:test": "vue-tsc && vite build --mode test",
+    "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
+    "dev": "vite --open",
+    "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
+    "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
+    "preview": "vite preview",
+    "start": "pnpm run dev"
+  },
+  "prettier": "prettier-config-ali",
+  "stylelint": {
+    "extends": [
+      "stylelint-config-ali",
+      "stylelint-prettier/recommended"
+    ]
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
@@ -23,18 +45,20 @@
     "vue-router": "4"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.18.1",
-    "@typescript-eslint/parser": "^8.18.1",
     "@vitejs/plugin-vue": "^5.0.4",
     "axios": "^1.6.8",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.32.0",
+    "eslint": "^9.38.0",
+    "eslint-config-ali": "^16.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "fast-glob": "^3.3.2",
     "globals": "^15.13.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.6.2",
+    "prettier-config-ali": "^1.5.0",
     "sass": "^1.72.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-ali": "^2.3.0",
+    "stylelint-prettier": "^5.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-svg-icons": "^2.0.1",
