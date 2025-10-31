@@ -1,36 +1,36 @@
-﻿## 鍩轰簬 VUE3 + VITE + TS 鐨勪釜浜哄崥瀹?
+﻿## 基于 VUE3 + VITE + TS 的个人博客
 
-### 鍐欏湪鍓嶈竟鐨勪竴浜涚纰庡康
+### 写在前边的一些碎碎念
 
-> &emsp;&emsp;鏈崥瀹㈤璁′负鎴戠殑涓汉鍗氬锛屽熀鏈粙缁嶄粠澶у鍒颁互鍚庡伐浣滅殑鎵€鏈夊巻绋嬶紝涔熺畻鏄鎴戝涔犵殑涓€涓　閲忋€傛垜鏈汉鏄笉鎬庝箞鍠滄璁板綍鐨勶紝浣嗘槸涔熸槸鍑轰簬瀵?*鍓嶇宸ヤ綔鐨勫枩鐖?*锛屾€昏寰楀浜嗙偣涓滆タ涓嶇敤涓€涓嬬湡鐨勪細蹇樺緱寰堝揩hhh锛屾墍浠ユ墦绠椾粠杩欏紑濮嬩娇鐢ㄨ繖涓変釜鍓嶇鎶€鏈繘琛屽崥瀹㈡惌寤恒€?
+> &emsp;&emsp;本博客预计为我的个人博客，基本介绍从大学到以后工作的所有历程，也算是对我学习的一个衡量。我本人是不怎么喜欢记录的，但是也是出于对**前端工作的喜爱**，总觉得学了点东西不用一下真的会忘得很快hhh，所以打算从这开始使用这三个前端技术进行博客搭建。
 
-> &emsp;&emsp;铏界劧鍗氬鐨勬暀绋嬪緢澶氾紝浣嗘槸鎴戝苟涓嶅枩娆㈢湅杩欎簺涓滆タ锛屽氨鍍忔槸鐜╀竴娆惧墽鎯呰В瀵嗘父鎴忥紝缁撳眬閮藉憡璇変綘浜嗭紝杩樻湁浠€涔堟剰鎬濆憿锛熻繖涓崥瀹㈡垜浼氭洿鑷村姏浜庤嚜宸卞幓瀹炵幇鍐欏啓涓滆タ锛屼笉鍙楅偅浜涙鏋剁殑绾︽潫鍜岄檺鍒讹紝鍐欒捣鏉ヤ篃鏇存湁鎴愬氨鎰熴€?
+> &emsp;&emsp;虽然博客的教程很多，但是我并不喜欢看这些东西，就像是玩一款剧情解密游戏，结局都告诉你了，还有什么意思呢？这个博客我会更致力于自己去实现写写东西，不受那些框架的约束和限制，写起来也更有成就感。
 
-> &emsp;&emsp; 甯屾湜鑳藉潥鎸佸埌鍗氬涓婄嚎锛屽姞娌癸紒Come On锛?
+> &emsp;&emsp; 希望能坚持到博客上线，加油！Come On！
 
-> 2024.5.6 璁?
-
----
-
-### 鎶€鏈爤
-鍓嶇锛歔Vue3](https://cn.vuejs.org/ "VUE3涓枃瀹樼綉"), [Vite](https://vitejs.cn/ "VITE涓枃瀹樼綉"), [TypeScript](https://www.tslang.cn/ "TS涓枃瀹樼綉"), [Element-Plus](https://element-plus.org/zh-CN/ "Element-Plus涓枃瀹樼綉"), [Pinia](https://pinia.web3doc.top/ "Pinia涓枃鏂囨。")
-
-鍚庣锛歔Node.js](https://nodejs.org/en "node鑻辨枃瀹樼綉"), [Express](https://www.expressjs.com.cn/ "Express涓枃缃?), [Redis](https://redis.io/ "Redis鑻辨枃瀹樼綉")
-
-> 涓嶅お鑰冭檻鍘讳娇鐢↗ava + SpringBoot鍘诲仛鍚庣锛屼絾鏄洰鍓嶅彧瀛︿簡Express妗嗘灦锛屽悗鏈熸湁浜嗗ソ鐨勫悗绔鏋惰繕浼氬幓閲嶆柊瀛︿範鍜屼娇鐢紝鐩墠鎵撶畻浣跨敤Express浣滀负鍚庣鏈嶅姟鍣ㄦ敮鎾?
-
-鏁版嵁搴擄細[MongoDB](https://www.mongodb.com/zh-cn/docs/ "MongoDB鏂囨。")
+> 2024.5.6 记
 
 ---
-> 2024.5.29 璁?
+
+### 技术栈
+前端：[Vue3](https://cn.vuejs.org/ "VUE3中文官网"), [Vite](https://vitejs.cn/ "VITE中文官网"), [TypeScript](https://www.tslang.cn/ "TS中文官网"), [Element-Plus](https://element-plus.org/zh-CN/ "Element-Plus中文官网"), [Pinia](https://pinia.web3doc.top/ "Pinia中文文档")
+
+后端：[Node.js](https://nodejs.org/en "node英文官网"), [Express](https://www.expressjs.com.cn/ "Express中文网"), [Redis](https://redis.io/ "Redis英文官网")
+
+> 不太考虑去使用Java + SpringBoot去做后端，但是目前只学了Express框架，后期有了好的后端框架还会去重新学习和使用，目前打算使用Express作为后端服务器支撑
+
+数据库：[MongoDB](https://www.mongodb.com/zh-cn/docs/ "MongoDB文档")
+
+---
+> 2024.5.29 记
 > 
-> 2025.1.4 fix: 鏂板Redis鎶€鏈? 灏嗘暟鎹簱鎶€鏈粠 MySQL 鏀逛负 MongoDB, 鍘绘帀 Pinia 鎸佷箙鍖栨彃浠?
+> 2025.1.4 fix: 新增Redis技术, 将数据库技术从 MySQL 改为 MongoDB, 去掉 Pinia 持久化插件
 
-### 鍔熻兘
+### 功能
 
-1. 鐧诲綍/娉ㄥ唽锛氶〉闈㈠畬鎴愶紙2024.6.29锛?
-2. 涓婚〉锛氫粙缁?+ 鑺遍噷鑳″摠鐨勫姛鑳?
-3. 甯栧瓙锛氱敓娲昏褰曘€佸涔犺褰曘€佸伐浣滆褰?
-4. 鍙嬮摼锛氬叾浠栦汉鍗氬锛堥」鐩級閾炬帴
-5. 鐣欒█鏉匡細娉ㄥ唽鐢ㄦ埛鐣欒█
-6. 鍏充簬锛氬崥瀹粙缁?[銆佷釜浜轰粙缁峕
+1. 登录/注册：页面完成（2024.6.29）
+2. 主页：介绍 + 花里胡哨的功能
+3. 帖子：生活记录、学习记录、工作记录
+4. 友链：其他人博客（项目）链接
+5. 留言板：注册用户留言
+6. 关于：博客介绍 [、个人介绍]
