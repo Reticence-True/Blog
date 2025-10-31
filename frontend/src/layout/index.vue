@@ -14,29 +14,40 @@
 <script setup lang="ts">
 import Tabbar from './tabbar/index.vue'
 import Main from './main/index.vue'
+
+
 </script>
 
 <style lang="scss" scoped>
 .layout {
     width: 100vw;
+    height: 100vh;
     min-width: $min-viewport-width;
+    max-width: $max-viewport-width;
+    min-height: $min-viewport-height;
+    max-height: $max-viewport-height;
+    display: flex;
+    position: relative;
 
     .layout-tabbar {
         width: 100%;
-        min-width: $min-viewport-width;
         height: $tabbar-base-height;
+        min-width: inherit;
+        max-width: inherit;
         position: absolute;
-        top: 0;
-        left: 0;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        z-index: 2;
     }
 
     .layout-main {
         width: 100%;
-        min-width: $min-viewport-width;
-        height: calc(100vh - $tabbar-base-height);
-        position: absolute;
-        top: $tabbar-base-height;
-        left: 0;
+        height: 100%;
+        min-width: inherit;
+        max-width: inherit;
+        min-height: inherit;
+        max-height: inherit;
+        position: relative;
     }
 }
 </style>

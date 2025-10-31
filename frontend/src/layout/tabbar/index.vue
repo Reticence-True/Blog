@@ -4,12 +4,7 @@
             <Blog></Blog>
         </div>
         <div class="tabbar-right">
-            <el-menu
-                class="route-menu"
-                mode="horizontal"
-                router
-                :default-active="$route.path"
-            >
+            <el-menu class="route-menu" mode="horizontal" router :default-active="$route.path">
                 <Menu :constantRoutes="userStore.menuRoutes"></Menu>
             </el-menu>
             <User></User>
@@ -41,8 +36,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $background-100;
-    border: 1px solid $background-300;
+    // background-color: var(--background-100);
+    // border: 1px solid var(--background-300);
+    background-color: transparent;
     overflow: hidden;
 
     .tabbar-left {
@@ -57,6 +53,8 @@ export default {
 
         .route-menu {
             height: $tabbar-base-height;
+            background-color: transparent;
+            border-bottom: none;
         }
     }
 }

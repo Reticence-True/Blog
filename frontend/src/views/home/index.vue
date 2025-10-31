@@ -13,27 +13,23 @@ import HomeBody from './body/index.vue'
 <style lang="scss" scoped>
 .container {
     width: 100vw;
-    max-width: $max-viewport-width;
-    min-width: $min-viewport-width;
-    height: calc(100vh - $tabbar-base-height);
-    max-height: calc($max-viewport-height - $tabbar-base-height);
-    min-height: calc($min-viewport-height - $tabbar-base-height);
-    background-color: $background-100;
+    background: var(--background--200);
+    padding-block-start: calc($tabbar-base-height);
+    margin-block-end: 4rem;
+    padding-inline: 30rem;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    position: relative;
 
     .header {
         width: 100%;
-        height: $header-height;
-        max-height: $header-height;
-        border-bottom: 0.1rem solid $background-300;
+        margin-block-end: 4rem;
     }
 
     .body {
         width: 100%;
-        height: calc(100% - $header-height);
-        padding: 3rem;
     }
+
 }
 </style>

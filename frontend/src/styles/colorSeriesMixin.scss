@@ -1,0 +1,41 @@
+// 主题色色阶变量混入
+@mixin el-theme-variables($primary) {
+    --primary-base: #{$primary};
+    --primary-l3: #{lighten($primary, 5%)};
+    --primary-l5: #{lighten($primary, 15%)};
+    --primary-l7: #{lighten($primary, 20%)};
+    --primary-l8: #{lighten($primary, 30%)};
+    --primary-l9: #{lighten($primary, 40%)};
+    --primary-d2: #{darken($primary, 20%)};
+}
+
+// 主题色色阶混入
+@mixin el-theme($primary) {
+    --el-color-primary: #{$primary};
+    --el-color-primary-light-3: #{lighten($primary, 5%)};
+    --el-color-primary-light-5: #{lighten($primary, 15%)};
+    --el-color-primary-light-7: #{lighten($primary, 20%)};
+    --el-color-primary-light-8: #{lighten($primary, 30%)};
+    --el-color-primary-light-9: #{lighten($primary, 40%)};
+    --el-color-primary-dark-2: #{darken($primary, 20%)};
+}
+
+// 强调色
+@mixin accent-colors-variables($accent) {
+    --accent-base: #{$accent};
+    --accent-light: #{lighten($accent, 15%)};
+    --accent-dark: #{darken($accent, 15%)};
+}
+
+// 文字色色阶变量混入
+@mixin text-colors-variables($text-primary, $text-secondary) {
+    --color-text-primary: #{$text-primary};
+    --color-text-secondary: #{$text-secondary};
+}
+
+// 背景色阶变量混入
+@mixin background-colors-variables($bg-color) {
+    --background-100: #{$bg-color};
+    --background-200: #{darken($bg-color, 5%)};
+    --background-300: #{darken($bg-color, 10%)};
+}

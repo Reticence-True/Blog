@@ -1,27 +1,15 @@
 <template>
     <div class="user">
-        <img
-            src="@/assets/icons/vue.svg"
-            alt="avatar"
-            class="avatar"
-            v-if="userStore.userInfo.atatarUrl"
-        />
-        <el-menu mode="horizontal" :ellipsis="false">
-            <el-sub-menu
-                index="tabbarusermenu0"
-                v-if="userStore.userInfo.username"
-            >
+        <img src="@/assets/icons/vue.svg" alt="avatar" class="avatar" v-if="userStore.userInfo.atatarUrl" />
+        <el-menu class="user-menu" mode="horizontal" :ellipsis="false">
+            <el-sub-menu index="tabbarusermenu0" v-if="userStore.userInfo.username">
                 <template #title>
                     {{ userStore.userInfo.username }}
                 </template>
                 <el-menu-item>我的信息</el-menu-item>
                 <el-menu-item @click="logout">退出登录</el-menu-item>
             </el-sub-menu>
-            <el-menu-item
-                title="点击去登录"
-                v-else
-                @click="$router.push('/login')"
-            >
+            <el-menu-item title="点击去登录" v-else @click="$router.push('/login')">
                 未登录
             </el-menu-item>
         </el-menu>
@@ -62,7 +50,7 @@ export default {
 .user {
     display: flex;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-left: 4.5rem;
 
     .avatar {
@@ -70,12 +58,12 @@ export default {
         height: 3rem;
         border-radius: 50%;
         margin-right: 1rem;
-        border: 0.1rem solid $text-100;
+        border: 0.1rem solid --text-primary;
     }
 
     .el-menu {
         height: 100%;
-        background-color: $background-100;
+        background-color: transparent;
         border: none;
 
         :deep(.el-sub-menu__title) {

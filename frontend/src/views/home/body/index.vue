@@ -1,35 +1,42 @@
 <template>
     <div class="body-container" ref="bodyContainerRef">
-        <div class="body-left">
-            <div class="top-chart" ref="customerFLowChartRef"></div>
-            <div class="bottom-statistics">
-                <span>上月访问人数：5 人</span>
-                <span>当前在线人数：3 人</span>
+        <div class="body-chart">
+            <div class="body-title">
+                数据概览
             </div>
+            <el-row justify="space-between">
+                <el-col :span="16">
+                    <div class="top-chart" ref="customerFLowChartRef"></div>
+                    <div class="bottom-statistics">
+                        <span>上月访问人数：5 人</span>
+                        <span>当前在线人数：3 人</span>
+                    </div>
+                </el-col>
+                <el-col :span="7">
+                    <el-row justify="space-between" :style="{ height: '100%', rowGap: '2rem' }">
+                        <record-card>
+                            <template #title>今日访客</template>
+                            <template #content>5 人</template>
+                        </record-card>
+                        <record-card>
+                            <template #title>当前在线人数</template>
+                            <template #content>5 人</template>
+                        </record-card>
+                    </el-row>
+                </el-col>
+            </el-row>
         </div>
-        <div class="body-right" ref="bodyRight">
+        <div class="body-essay" ref="bodyRight">
             <div class="new-text">最新内容</div>
             <div class="new-essays">
-                <el-card
-                    class="essay-item"
-                    ref="essayItemsRef"
-                    :body-style="{
-                        padding: '0',
-                        height: '100%',
-                        overflow: 'hidden',
-                    }"
-                    v-for="(item, index) in essayItemCount"
-                    :key="index"
-                >
-                    <div style="height: 100%">
-                        <p class="essay-title" ref="essayTitlesRef">
-                            文章标题 {{ item }}
-                        </p>
-                        <p class="essay-context" ref="essayContextsRef">
+                <template v-for="count in essayItemCount" :key="count">
+                    <essay-card ref="essayCardRef">
+                        <template #title>文章标题 {{ count }}</template>
+                        <template #content>
                             善体及律歌。针校培需案营？妈市班此现后住安你消帝。右给象倍跑九措。战实师界货医，考胶控故加变预万刘守叶。胡湖形洋功诗於每毛止节味。知百别尼她陆沿由师即型烧。粒还妒观思态超史承。善体及律歌。针校培需案营？妈市班此现后住安你消帝。右给象倍跑九措。战实师界货医，考胶控故加变预万刘守叶。胡湖形洋功诗於每毛止节味。知百别尼她陆沿由师即型烧。粒还妒观思态超史承。
-                        </p>
-                    </div>
-                </el-card>
+                        </template>
+                    </essay-card>
+                </template>
             </div>
         </div>
     </div>
@@ -37,16 +44,14 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { type CardInstance } from 'element-plus'
-import { toInteger } from 'lodash'
 import * as echarts from 'echarts'
-import getScssVariable from '@/utils/getScssVariable'
+import getCssVariable from '@/utils/getCssVariable'
+import RecordCard from './record-card/index.vue'
+import EssayCard from './essay-card/index.vue'
 
 const bodyContainerRef = ref<HTMLElement>() // 容器Ref
-// 文章部分ref
-const essayItemsRef = ref<CardInstance[]>([]) // 文章项
-const essayTitlesRef = ref<HTMLElement[]>([]) // 文章标题
-const essayContextsRef = ref<HTMLElement[]>([]) // 文章内容
+const essayCardRef = ref<HTMLDivElement[] | HTMLDivElement>() // 文章卡片Ref
+
 // 最大文章个数
 const maxEssayItemCount: number = 3 // 手动修改，默认为3
 // 文章项目个数
@@ -55,31 +60,6 @@ let essayItemCount: number = maxEssayItemCount // 默认为 最大文章个数
 const customerFLowChartRef = ref<HTMLElement>()
 let customerFLowChart: any = null
 
-/**
- * 设置文章项文字溢出样式
- */
-const textOverflowStyle = () => {
-    const essayContexts = essayContextsRef.value
-
-    essayContexts.forEach((essayContext, index) => {
-        const essayItem: HTMLElement = essayItemsRef.value[index].$el
-        const essayTitle = essayTitlesRef.value[index]
-
-        // 文字容器高度：容器高度 - 标题高度 - 标题下外边距
-        let contextContainerHeight: number =
-            essayItem.clientHeight -
-            essayTitle.clientHeight -
-            parseFloat(getComputedStyle(essayTitle, null)['marginBottom'])
-        // 获取行高
-        let contextLineHeight: number = parseFloat(
-            getComputedStyle(essayContext, null)['lineHeight'],
-        )
-        // 设置裁切行数
-        essayContext.style.webkitLineClamp = toInteger(
-            contextContainerHeight / contextLineHeight - 1,
-        ).toString()
-    })
-}
 
 /**
  * 监听容器高度变化
@@ -89,7 +69,10 @@ const observeBottomContainerHeight = () => {
         for (const entry of entries) {
             if (entry.contentRect.height) {
                 // 重新绘制文字
-                textOverflowStyle()
+                Array.isArray(essayCardRef.value) ? essayCardRef.value?.forEach((essayCard) => {
+                    (essayCard as any).textOverflowStyle()
+                }) : (essayCardRef.value as any)?.textOverflowStyle()
+
                 // 图表尺寸修改
                 customerFLowChart?.resize()
             }
@@ -117,7 +100,7 @@ const createFlowCharts = () => {
         textStyle: {
             fontSize: chartFontSize,
             fontFamily: 'Alibaba PuHuiTi',
-            color: getScssVariable('$text-100'),
+            color: getCssVariable('--text-primary'),
         },
         title: {
             text: '客流量曲线',
@@ -148,7 +131,7 @@ const createFlowCharts = () => {
             ],
             axisLabel: {
                 fontSize: chartFontSize,
-                color: getScssVariable('$text-100'),
+                color: getCssVariable('--text-primary'),
                 fontFamily: 'AlibabaPuHuiTi',
             },
         },
@@ -160,7 +143,7 @@ const createFlowCharts = () => {
                 },
                 axisLabel: {
                     fontSize: chartFontSize,
-                    color: getScssVariable('$text-100'),
+                    color: getCssVariable('--text-primary'),
                     fontFamily: 'AlibabaPuHuiTi',
                     formatter: '{value}人',
                 },
@@ -172,7 +155,7 @@ const createFlowCharts = () => {
                 },
                 axisLabel: {
                     fontSize: chartFontSize,
-                    color: getScssVariable('$text-100'),
+                    color: getCssVariable('--text-primary'),
                     fontFamily: 'AlibabaPuHuiTi',
                     formatter: '{value}%',
                 },
@@ -198,11 +181,11 @@ const createFlowCharts = () => {
                         colorStops: [
                             {
                                 offset: 0,
-                                color: getScssVariable('$accent-100') + '60',
+                                color: getCssVariable('--accent-base'),
                             },
                             {
                                 offset: 1,
-                                color: getScssVariable('$accent-100') + '60',
+                                color: getCssVariable('--accent-base') + '60',
                             },
                         ],
                     },
@@ -224,10 +207,10 @@ const createFlowCharts = () => {
                 symbolSize: 14,
                 lineStyle: {
                     width: 4,
-                    color: getScssVariable('$primary-400'),
+                    color: getCssVariable('--primary-l5'),
                 },
                 itemStyle: {
-                    color: getScssVariable('$accent-100'),
+                    color: getCssVariable('--primary-l5'),
                     borderWidth: 2,
                     borderColor: '#fff',
                 },
@@ -250,27 +233,27 @@ const createFlowCharts = () => {
                 '2025年2月第4周',
             ],
             // 背景按钮
-            itemStyle: { color: getScssVariable('$primary-0') },
+            itemStyle: { color: getCssVariable('--primary-l8') },
             // 选中的按钮
-            checkpointStyle: { color: getScssVariable('$primary-600') },
+            checkpointStyle: { color: getCssVariable('--primary-base') },
             // 背景线段
-            lineStyle: { color: getScssVariable('$primary-0') },
+            lineStyle: { color: getCssVariable('--primary-l9') },
             // 未选中文字
-            label: { color: getScssVariable('$primary-400') },
+            label: { color: getCssVariable('--primary-l7') },
             // 控制按钮：播放，下一个和前一个
-            controlStyle: { color: getScssVariable('$primary-400') },
+            controlStyle: { color: getCssVariable('--primary-l3') },
             // 走过的线段/选中按钮/背景按钮的样式
             progress: {
-                lineStyle: { color: getScssVariable('$primary-400') },
-                itemStyle: { color: getScssVariable('$primary-400') },
-                label: { color: getScssVariable('$primary-600') },
+                lineStyle: { color: getCssVariable('--primary-l9') },
+                itemStyle: { color: getCssVariable('--primary-l5') },
+                label: { color: getCssVariable('--primary-base') },
             },
             // 鼠标悬停的线段/选中按钮/背景按钮的样式
             emphasis: {
-                checkpointStyle: { color: getScssVariable('$primary-400') },
-                itemStyle: { color: getScssVariable('$primary-400') },
-                label: { color: getScssVariable('$primary-600') },
-                controlStyle: { color: getScssVariable('$primary-400') },
+                checkpointStyle: { color: getCssVariable('--primary-l3') },
+                itemStyle: { color: getCssVariable('--primary-l3') },
+                label: { color: getCssVariable('--primary-base') },
+                controlStyle: { color: getCssVariable('--primary-l3') },
             },
             bottom: 0,
             padding: [5, 0, 0, 0],
@@ -339,8 +322,6 @@ const createFlowCharts = () => {
 }
 
 onMounted(() => {
-    // 设置文章项文字溢出样式
-    textOverflowStyle()
     // 监听文章容器高度变化
     observeBottomContainerHeight()
     // 生成流量图表
@@ -358,33 +339,28 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
 
-    .body-left {
+    .body-chart {
         width: 100%;
-        height: 100%;
-        flex: 2;
-        margin-right: 6rem;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        margin-block-end: 4rem;
 
         .top-chart {
-            height: 100%;
-            background-color: $background-200;
+            height: 31rem;
+            background-color: #fff;
+            border: 1px solid var(--border-color);
             border-radius: 1rem;
             padding: 1rem;
-            margin-bottom: 1.5rem;
-            flex: 31;
+            margin-bottom: 2rem;
         }
 
         .bottom-statistics {
-            height: 100%;
-            flex: 5;
-            background: linear-gradient(
-                to right bottom,
-                $primary-300,
-                $primary
-            );
+            height: 5rem;
+            background: linear-gradient(to right bottom,
+                    var(--primary-l9),
+                    var(--primary-l8));
             display: flex;
             justify-content: space-evenly;
             align-items: center;
@@ -392,12 +368,12 @@ export default {
 
             span {
                 font-size: 2rem;
-                color: $primary-600;
+                color: var(--primary-d2);
             }
         }
     }
 
-    .body-right {
+    .body-essay {
         width: 100%;
         height: 100%;
         flex: 3;
@@ -415,32 +391,13 @@ export default {
             flex-direction: column;
             overflow: hidden;
 
-            .essay-item {
-                width: 100%;
-                height: 100%;
-                background-color: $background-200;
-                border-radius: 1.5rem;
-                padding: 1rem 2rem;
-                margin-top: 1.5rem;
-                flex: 1;
-
-                .essay-title {
-                    font-size: 2rem;
-                    font-weight: bold;
-                    margin-bottom: 0.5rem;
-                }
-
-                .essay-context {
-                    width: 100%;
-                    font-size: 1.8rem;
-                    line-height: 2.2rem;
-                    text-indent: 2em;
-                    display: -webkit-box;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                }
-            }
         }
+    }
+
+    .body-title {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+
     }
 }
 </style>

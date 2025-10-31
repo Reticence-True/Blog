@@ -1,8 +1,11 @@
 <template>
     <div class="head-container">
         <div class="header-text">
-            <p>春</p>
-            <p>Spring</p>
+            <p>
+                <span>春</span>
+                <span :style="{ marginInline: '2rem' }">·</span>
+                <span>Spring</span>
+            </p>
         </div>
         <div class="header-carousel">
             <el-carousel indicator-position="none" height="auto">
@@ -24,46 +27,43 @@ export default {
 <style lang="scss" scoped>
 .head-container {
     width: 100%;
-    height: 100%;
-    max-height: 100%;
-    padding: 0 15rem;
-    border-bottom: 1px solid $background-200;
     display: flex;
-    overflow: hidden;
+    flex-direction: column;
 
     .header-text {
-        width: 50%;
-        height: 100%;
-        flex: 1;
+        height: 24rem;
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
 
         p {
             font-size: 7rem;
-            color: $primary;
+            color: var(--primary-base);
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
     // 不能开 flex 布局，会将跑马灯挤下去
     .header-carousel {
-        width: 50%;
-        height: 100%;
-        flex: 1;
+        height: 28.8rem;
+        aspect-ratio: 16/9;
 
         .el-carousel__item {
             width: 100%;
-            height: $header-height;
+            height: 28.8rem;
+            border-radius: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
 
+
             img {
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
+                object-fit: cover;
             }
         }
     }

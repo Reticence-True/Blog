@@ -7,40 +7,21 @@
                 </template>
             </el-page-header>
             <div class="verification-form">
-                <el-form
-                    inline
-                    style="display: block"
-                    :rules="rules"
-                    :model="{ code }"
-                    ref="codeFormRef"
-                >
+                <el-form inline style="display: block" :rules="rules" :model="{ code }" ref="codeFormRef">
                     <el-form-item prop="code">
-                        <el-input
-                            placeholder="请输入邮箱验证码"
-                            v-model="code"
-                        />
+                        <el-input placeholder="请输入邮箱验证码" v-model="code" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button
-                            type="primary"
-                            size="default"
-                            @click="getCode"
-                            :disabled="codeBtnIsDisabled"
-                            :loading="codeBtnLoading"
-                        >
+                        <el-button type="primary" size="default" @click="getCode" :disabled="codeBtnIsDisabled"
+                            :loading="codeBtnLoading">
                             {{ codeBtnText }}
                         </el-button>
                     </el-form-item>
                 </el-form>
             </div>
-            <el-button
-                type="primary"
-                size="large"
-                class="verification"
-                :disabled="!(code.length === 6 || verifyBtnIsDisabled)"
-                :loading="verifyBtnIsDisabled"
-                @click="vefifyCode"
-            >
+            <el-button type="primary" size="large" class="verification"
+                :disabled="!(code.length === 6 || verifyBtnIsDisabled)" :loading="verifyBtnIsDisabled"
+                @click="vefifyCode">
                 验证
             </el-button>
         </div>
@@ -177,8 +158,7 @@ const vefifyCode = debounce(async () => {
     height: 100vh;
     max-height: $max-viewport-height;
     min-height: $min-viewport-height;
-    background: url('@/assets/images/login_background.jpg') no-repeat center
-        center;
+    background: url('@/assets/images/login_background.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -190,7 +170,7 @@ const vefifyCode = debounce(async () => {
         border-radius: 1.2rem;
         box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
         border: 0.1rem solid #fff;
-        background-color: $background-100;
+        background-color: var(--background-100);
         display: flex;
         justify-content: space-around;
         flex-direction: column;

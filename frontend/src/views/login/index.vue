@@ -11,24 +11,14 @@
                     </div>
                 </div>
                 <div class="switch-btn-page" ref="btnPage">
-                    <el-button
-                        type="primary"
-                        size="large"
-                        class="switch-2-signup login-btn"
-                        :disabled="loginStore.btnsDisabled"
-                        :loading="loginStore.btnsDisabled"
-                        @click="dialogVisible = true"
-                    >
+                    <el-button type="primary" size="large" class="switch-2-signup login-btn"
+                        :disabled="loginStore.btnsDisabled" :loading="loginStore.btnsDisabled"
+                        @click="dialogVisible = true">
                         Sign up 注册
                     </el-button>
-                    <el-button
-                        type="primary"
-                        size="large"
-                        class="switch-2-login login-btn"
-                        :disabled="loginStore.btnsDisabled"
-                        :loading="loginStore.btnsDisabled"
-                        @click="dialogVisible = true"
-                    >
+                    <el-button type="primary" size="large" class="switch-2-login login-btn"
+                        :disabled="loginStore.btnsDisabled" :loading="loginStore.btnsDisabled"
+                        @click="dialogVisible = true">
                         Log in 登录
                     </el-button>
                 </div>
@@ -115,8 +105,7 @@ export default {
     height: 100vh;
     max-height: $max-viewport-height;
     min-height: $min-viewport-height;
-    background: url('@/assets/images/login_background.jpg') no-repeat center
-        center;
+    background: url('@/assets/images/login_background.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -150,7 +139,7 @@ export default {
                 width: 50%;
                 height: 100%;
                 border-radius: inherit;
-                background: $background-100;
+                background: var(--background-100);
                 position: absolute;
             }
 

@@ -1,64 +1,92 @@
 /** 样式全局变量 */
+// 导入mixin
+@import "colorSeriesMixin";
+
 /* 屏幕适配 16:9 */
 // 最大分辨率 4K
-$max-viewport-width: 384rem;
-$max-viewport-height: 216rem;
+$max-viewport-width: 3840px;
+$max-viewport-height: 2160px;
 // 最小分辨率 1080p
-$min-viewport-width: 128rem;
-$min-viewport-height: 54rem;
+$min-viewport-width: 1280px;
+$min-viewport-height: 540px;
+
+/* 四季主色调 */
+// =============== 春季 🌸 ===============
+$spring-primary: hsl(330, 78%, 49%);
+$spring-accent: #a8e6cf;
+$spring-text-primary: #4b3b4f; // 深紫灰，主文字
+$spring-text-secondary: #6e5a70; // 浅紫灰，次文字
+$spring-border-color: #e8e6e1;
+$spring-bg: #fafaf8;
+
+// =============== 夏季 🌞 ===============
+$summer-primary: #4fc3f7;
+$summer-accent: #00bcd4;
+$summer-text-primary: #07475c; // 深蓝色，主文字
+$summer-text-secondary: #216d8f; // 浅蓝色，次文字
+$summer-border-color: #d6eaf0;
+$summer-bg: #f4fafb;
+
+// =============== 秋季 🍁 ===============
+$autumn-primary: #e59866;
+$autumn-accent: #d35400;
+$autumn-text-primary: #5a3a1b; // 深棕色，主文字
+$autumn-text-secondary: #8c5a33; // 浅棕色，次文字
+$autumn-border-color: #ede0d4;
+$autumn-bg: #fdf8f4;
+
+// =============== 冬季 ❄️ ===============
+$winter-primary: #90caf9;
+$winter-accent: #5c6bc0;
+$winter-text-primary: #2a3b5c; // 深蓝灰，主文字
+$winter-text-secondary: #4b5e8a; // 浅蓝灰，次文字
+$winter-border-color: #e0e3e7;
+$winter-bg: #f7f9fb;
 
 /* layout */
 
 /* tabbar */
-$tabbar-base-height: 5rem;
+$tabbar-base-height: 8rem;
 
 /* main */
-// 主题区部分
-$header-height: 21rem;
 
 /* 主题 */
+:root[data-theme="spring"] {
+    --border-color: #{$spring-border-color};
 
-// 春季主题配色
-$spring-primary-0: #C4E4B2;
-$spring-primary-100: #b0f29e;
-$spring-primary-200: #96e780;
-$spring-primary-300: #7dcf62;
-$spring-primary-400: #66b744;
-$spring-primary: #509f26;
-$spring-primary-600: #005e00;
-$spring-accent-100: #ffd700;
-$spring-accent-200: #917800;
+    @include el-theme($spring-primary);
+    @include el-theme-variables($spring-primary);
+    @include accent-colors-variables($spring-accent);
+    @include text-colors-variables($spring-text-primary, $spring-text-secondary);
+    @include background-colors-variables($spring-bg);
+}
 
-// 全局使用的主题配色
-$text-100: #333333;
-$text-200: #5c5c5c;
-$background-100: #f9f8f8;
-$background-200: #efeeee;
-$background-300: #c6c5c5;
-$primary-0: $spring-primary-0;
-$primary-100: $spring-primary-100;
-$primary-200: $spring-primary-200;
-$primary-300: $spring-primary-300;
-$primary-400: $spring-primary-400;
-$primary: $spring-primary;
-$primary-600: $spring-primary-600;
-$accent-100: $spring-accent-100;
-$accent-200: $spring-accent-200;
+:root[data-theme="summer"] {
+    --border-color: #{$summer-border-color};
 
-// 公共css变量
-:root {
-    --text-100: #{$text-100};
-    --text-200: #{$text-200};
-    --background-100: #{$background-100};
-    --background-200: #{$background-200};
-    --background-300: #{$background-300};
-    --primary-0: #{$primary-0};
-    --primary-100: #{$primary-100};
-    --primary-200: #{$primary-200};
-    --primary-300: #{$primary-300};
-    --primary-400: #{$primary-400};
-    --primary: #{$primary};
-    --primary-600: #{$primary-600};
-    --accent-100: #{$accent-100};
-    --accent-200: #{$accent-200};
+    @include el-theme($summer-primary);
+    @include el-theme-variables($summer-primary);
+    @include accent-colors-variables($summer-accent);
+    @include text-colors-variables($summer-text-primary, $summer-text-secondary);
+    @include background-colors-variables($summer-bg);
+}
+
+:root[data-theme="autumn"] {
+    --border-color: #{$autumn-border-color};
+
+    @include el-theme($autumn-primary);
+    @include el-theme-variables($autumn-primary);
+    @include accent-colors-variables($autumn-accent);
+    @include text-colors-variables($autumn-text-primary, $autumn-text-secondary);
+    @include background-colors-variables($autumn-bg);
+}
+
+:root[data-theme="winter"] {
+    --border-color: #{$winter-border-color};
+
+    @include el-theme($winter-primary);
+    @include el-theme-variables($winter-primary);
+    @include accent-colors-variables($winter-accent);
+    @include text-colors-variables($winter-text-primary, $winter-text-secondary);
+    @include background-colors-variables($winter-bg);
 }

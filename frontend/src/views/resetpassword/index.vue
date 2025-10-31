@@ -7,36 +7,17 @@
                 </template>
             </el-page-header>
             <div class="reset-form">
-                <el-form
-                    :model="resetPwd"
-                    label-width="0"
-                    :rules="rules"
-                    ref="resetFormRef"
-                >
+                <el-form :model="resetPwd" label-width="0" :rules="rules" ref="resetFormRef">
                     <el-form-item prop="password">
-                        <el-input
-                            placeholder="新密码"
-                            v-model="resetPwd.password"
-                            clearable
-                            show-password
-                        ></el-input>
+                        <el-input placeholder="新密码" v-model="resetPwd.password" clearable show-password></el-input>
                     </el-form-item>
                     <el-form-item prop="confirmPassword">
-                        <el-input
-                            placeholder="确认新密码"
-                            v-model="resetPwd.confirmPassword"
-                            clearable
-                            show-password
-                        ></el-input>
+                        <el-input placeholder="确认新密码" v-model="resetPwd.confirmPassword" clearable
+                            show-password></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button
-                            type="primary"
-                            class="reset-btn"
-                            :disabled="resetBtnDisabled"
-                            :loading="resetBtnDisabled"
-                            @click="resetPwdEvent"
-                        >
+                        <el-button type="primary" class="reset-btn" :disabled="resetBtnDisabled"
+                            :loading="resetBtnDisabled" @click="resetPwdEvent">
                             重置密码
                         </el-button>
                     </el-form-item>
@@ -116,8 +97,7 @@ onMounted(() => {
     height: 100vh;
     max-height: $max-viewport-height;
     min-height: $min-viewport-height;
-    background: url('@/assets/images/login_background.jpg') no-repeat center
-        center;
+    background: url('@/assets/images/login_background.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -129,7 +109,7 @@ onMounted(() => {
         border-radius: 1.2rem;
         box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
         border: 0.1rem solid #fff;
-        background-color: $background-100;
+        background-color: var(--background-100);
         display: flex;
         justify-content: space-around;
         flex-direction: column;

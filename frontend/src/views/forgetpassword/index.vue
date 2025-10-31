@@ -8,23 +8,13 @@ s
                 </template>
             </el-page-header>
             <div class="forget-form">
-                <el-form
-                    inline
-                    :rules="rules"
-                    :model="{ email }"
-                    ref="forgetFormRef"
-                >
+                <el-form inline :rules="rules" :model="{ email }" ref="forgetFormRef">
                     <el-form-item prop="email">
                         <el-input placeholder="请输入邮箱" v-model="email" />
                     </el-form-item>
                     <el-form-item>
-                        <el-button
-                            type="primary"
-                            size="default"
-                            :disabled="resetPwdBtnDisabled"
-                            :loading="resetPwdBtnDisabled"
-                            @click="resetPassword"
-                        >
+                        <el-button type="primary" size="default" :disabled="resetPwdBtnDisabled"
+                            :loading="resetPwdBtnDisabled" @click="resetPassword">
                             找回密码
                         </el-button>
                     </el-form-item>
@@ -97,8 +87,7 @@ const resetPassword = debounce(async () => {
     height: 100vh;
     max-height: $max-viewport-height;
     min-height: $min-viewport-height;
-    background: url('@/assets/images/login_background.jpg') no-repeat center
-        center;
+    background: url('@/assets/images/login_background.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -114,7 +103,7 @@ const resetPassword = debounce(async () => {
         border-radius: 1.2rem;
         box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
         border: 0.1rem solid #fff;
-        background-color: $background-100;
+        background-color: var(--background-100);
         display: flex;
         justify-content: space-around;
         flex-direction: column;

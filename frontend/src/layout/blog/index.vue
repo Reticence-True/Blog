@@ -14,7 +14,7 @@ export default {
 
 <style scoped lang="scss">
 .blog {
-    font-size: 1.8rem;
+    font-size: 2rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
