@@ -100,28 +100,21 @@ export default {
 <style scoped lang="scss">
 .app {
     width: 100vw;
-    max-width: $max-viewport-width;
-    min-width: $min-viewport-width;
     height: 100vh;
-    max-height: $max-viewport-height;
-    min-height: $min-viewport-height;
     background: url('@/assets/images/login_background.jpg') no-repeat center center;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     .container {
         width: 80%;
-        max-width: $max-viewport-width * 0.8;
-        min-width: $min-viewport-width * 0.8;
         height: 90%;
-        max-height: $max-viewport-height * 0.9;
-        min-height: $min-viewport-height * 0.9;
-        border: 0.1rem solid #fff;
-        border-radius: 2rem;
+        border: 1px solid #fff;
+        border-radius: 20px;
         text-align: center;
-        box-shadow: 0.35rem 0.35rem 0.15rem rgba(0, 0, 0, 0.3);
+        box-shadow: 3.5px 3.5px 1.5px rgba(0, 0, 0, 0.3);
         overflow: hidden;
         position: relative;
 
@@ -182,9 +175,9 @@ export default {
 </style>
 <style ::v-deep lang="scss">
 .login-btn {
-    width: 15.5rem;
-    height: 4.5rem;
-    font-size: 2rem;
+    width: w(160);
+    height: h(50);
+    font-size: w(20);
     margin: 0;
 }
 </style>

@@ -21,21 +21,21 @@ export default {
 <style scoped lang="scss">
 .record-card {
     width: 100%;
-    padding-block: 3rem;
+    padding-block: h(30);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
+    border-radius: w(10);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: w(15) h(15);
 
     &-title {
-        font-size: 2.2rem;
+        font-size: clamp(22px, w(22), 220px);
     }
 
     &-content {
-        font-size: 5rem;
+        font-size: clamp(50px, w(50), 500px);
         font-weight: bold;
     }
 }

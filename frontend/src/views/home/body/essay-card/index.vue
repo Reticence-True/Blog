@@ -1,7 +1,7 @@
 <template>
-    <el-card class="essay-item" ref="essayItemRef" :body-style="{
+    <el-card class="essay-item" body-class="essay-item-body" ref="essayItemRef" :body-style="{
         padding: '0',
-        height: '10.5rem',
+        height: '100%',
         overflow: 'hidden',
     }">
         <div style="height: 100%">
@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang='ts'>
-import { CardInstance } from 'element-plus';
-import { toInteger } from 'lodash';
 import { ref } from 'vue';
+import { toInteger } from 'lodash';
+import { CardInstance } from 'element-plus';
 
 // 文章部分ref
 const essayItemRef = ref<CardInstance>() // 文章项
@@ -65,32 +65,36 @@ export default {
 <style scoped lang="scss">
 .essay-item {
     width: 100%;
-    height: 100%;
+    height: clamp(145px, calc(w(105) + h(40)), 1450px);
     background-color: #fff;
-    border-radius: 1.5rem;
-    padding: 1rem 2rem;
-    margin-top: 1.5rem;
+    border-radius: w(15);
+    padding: h(20) w(50);
+    margin-top: h(15);
     flex: 1;
     border: 1px solid var(--border-color);
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
     box-shadow: 0 0 0 transparent;
+    user-select: none;
+    cursor: pointer;
+
+    &-body {}
 
 
     &:hover {
-        box-shadow: 0 0.5rem 1rem var(--border-color);
-        transform: translateY(-0.5rem);
+        box-shadow: 0 5px 10px var(--border-color);
+        transform: translateY(-5px);
     }
 
     .essay-title {
-        font-size: 2rem;
+        font-size: clamp(20px, w(20), 200px);
         font-weight: bold;
-        margin-bottom: 0.5rem;
+        margin-bottom: h(5);
     }
 
     .essay-content {
         width: 100%;
-        font-size: 1.8rem;
-        line-height: 2.2rem;
+        font-size: clamp(18px, w(18), 20px);
+        line-height: clamp(22px, h(22), 22px);
         text-indent: 2em;
         display: -webkit-box;
         -webkit-box-orient: vertical;

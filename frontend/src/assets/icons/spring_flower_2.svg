@@ -1,0 +1,20 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style><![CDATA[
+      .petal { fill: #ffd8e8; stroke: #e68ab2; stroke-width: 10; stroke-linejoin: round; }
+      .center { fill: #e68ab2; stroke: #c85f83; stroke-width: 6; }
+    ]]></style>
+  </defs>
+
+  <!-- 上花瓣 -->
+  <ellipse cx="150" cy="90" rx="35" ry="65" class="petal" />
+  <!-- 下花瓣 -->
+  <ellipse cx="150" cy="210" rx="35" ry="65" class="petal" />
+  <!-- 左花瓣 -->
+  <ellipse cx="90" cy="150" rx="65" ry="35" class="petal" />
+  <!-- 右花瓣 -->
+  <ellipse cx="210" cy="150" rx="65" ry="35" class="petal" />
+
+  <!-- 花心（粉色） -->
+  <circle cx="150" cy="150" r="25" class="center" />
+</svg>

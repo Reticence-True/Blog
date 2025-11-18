@@ -13,7 +13,7 @@
                     </div>
                 </el-col>
                 <el-col :span="7">
-                    <el-row justify="space-between" :style="{ height: '100%', rowGap: '2rem' }">
+                    <el-row justify="space-between" :style="{ height: '100%', rowGap: h(20) }">
                         <record-card>
                             <template #title>今日访客</template>
                             <template #content>5 人</template>
@@ -46,6 +46,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import getCssVariable from '@/utils/getCssVariable'
+import { w, h } from '@/utils/responsiveSize'
 import RecordCard from './record-card/index.vue'
 import EssayCard from './essay-card/index.vue'
 
@@ -90,7 +91,7 @@ const observeBottomContainerHeight = () => {
  * 流量图表
  */
 const createFlowCharts = () => {
-    const chartFontSize = '1.2rem' // 图表全局字体大小
+    const chartFontSize = parseInt(w(12)) < 12 ? 12 : w(12) // 图表全局字体大小
     customerFLowChart = echarts.init(customerFLowChartRef.value)
     customerFLowChart.setOption({
         grid: {
@@ -106,7 +107,7 @@ const createFlowCharts = () => {
             text: '客流量曲线',
             textStyle: {
                 fontFamily: 'Alibaba PuHuiTi',
-                fontSize: '1.8rem',
+                fontSize: parseInt(w(18)) < 18 ? 18 : w(18),
                 fontWeight: 'bold',
             },
         },
@@ -345,29 +346,29 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-block-end: 4rem;
+        margin-block-end: h(40);
 
         .top-chart {
-            height: 31rem;
+            height: clamp(310px, h(310), 3100px);
             background-color: #fff;
             border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-bottom: 2rem;
+            border-radius: w(10);
+            padding: w(10) h(10);
+            margin-bottom: h(20);
         }
 
         .bottom-statistics {
-            height: 5rem;
+            height: clamp(50px, h(50), 500px);
             background: linear-gradient(to right bottom,
                     var(--primary-l9),
                     var(--primary-l8));
             display: flex;
             justify-content: space-evenly;
             align-items: center;
-            border-radius: 1rem;
+            border-radius: w(10);
 
             span {
-                font-size: 2rem;
+                font-size: clamp(20px, w(20), 200px);
                 color: var(--primary-d2);
             }
         }
@@ -381,7 +382,7 @@ export default {
         flex-direction: column;
 
         .new-text {
-            font-size: 2.2rem;
+            font-size: clamp(22px, w(22), 220px);
         }
 
         .new-essays {
@@ -395,8 +396,8 @@ export default {
     }
 
     .body-title {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
+        font-size: clamp(22px, w(22), 220px);
+        margin-bottom: h(20);
 
     }
 }

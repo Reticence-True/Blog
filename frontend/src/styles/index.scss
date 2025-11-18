@@ -27,14 +27,15 @@
 }
 
 html {
+    width: 100vw;
+    height: 100vh;
+    font-size: clamp(10px, w(10), 20px);
     font-family: "Alibaba PuHuiTi", sans-serif;
     color: var(--text-100);
+    overflow: hidden;
 }
 
-:root {
-    font-size: 62.5%;
-
-    @media (min-width: 1921px) or (min-height: 1081px) {
-        font-size: 125%;
-    }
+#app {
+    width: 100vw;
+    height: 100vh;
 }

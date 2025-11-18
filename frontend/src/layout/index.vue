@@ -1,10 +1,10 @@
 <template>
     <div class="layout">
         <div class="layout-tabbar">
-            <Tabbar></Tabbar>
+            <Tabbar ref="layoutTabbarRef"></Tabbar>
         </div>
         <div class="layout-main">
-            <el-scrollbar>
+            <el-scrollbar ref="layoutMainRef">
                 <Main></Main>
             </el-scrollbar>
         </div>
@@ -14,24 +14,40 @@
 <script setup lang="ts">
 import Tabbar from './tabbar/index.vue'
 import Main from './main/index.vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
+const layoutTabbarRef = ref<any>()
+const layoutMainRef = ref<any>()
 
+// Main 组件滚动事件
+const onLayoutMainScroll = (e: MouseEvent) => {
+    // 滚动时设置tabbar透明
+    layoutTabbarRef.value?.isTabbarTransparent((e.target as HTMLDivElement).scrollTop <= 0)
+}
+
+onMounted(() => {
+    // 设置tabbar透明
+    layoutTabbarRef.value?.isTabbarTransparent(true)
+    // 绑定滚动事件
+    layoutMainRef.value?.wrapRef.addEventListener('scroll', onLayoutMainScroll)
+})
+
+onBeforeUnmount(() => {
+    // 移除滚动事件
+    layoutMainRef.value?.removeEventListener('scroll', onLayoutMainScroll)
+})
 </script>
 
 <style lang="scss" scoped>
 .layout {
-    width: 100vw;
-    height: 100vh;
-    min-width: $min-viewport-width;
-    max-width: $max-viewport-width;
-    min-height: $min-viewport-height;
-    max-height: $max-viewport-height;
+    width: 100%;
+    height: 100%;
     display: flex;
     position: relative;
 
     .layout-tabbar {
         width: 100%;
-        height: $tabbar-base-height;
+        height: clamp($tabbar-base-height* 1px, h($tabbar-base-height), $tabbar-base-height * 10px);
         min-width: inherit;
         max-width: inherit;
         position: absolute;
@@ -45,8 +61,6 @@ import Main from './main/index.vue'
         height: 100%;
         min-width: inherit;
         max-width: inherit;
-        min-height: inherit;
-        max-height: inherit;
         position: relative;
     }
 }

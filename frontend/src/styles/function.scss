@@ -1,0 +1,12 @@
+/** scss函数 */
+@use "./variable.scss";
+
+// 换算宽度
+@function w($size) {
+    @return $size / $standard-viewport-width * 100vw;
+}
+
+// 换算高度
+@function h($size) {
+    @return $size / $standard-viewport-height * 100vh;
+}

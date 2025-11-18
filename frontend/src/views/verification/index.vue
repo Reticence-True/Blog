@@ -167,14 +167,14 @@ const vefifyCode = debounce(async () => {
     .container {
         width: 45%;
         height: 40%;
-        border-radius: 1.2rem;
-        box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
-        border: 0.1rem solid #fff;
+        border-radius: w(12);
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+        border: 1px solid #fff;
         background-color: var(--background-100);
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        padding: 3rem;
+        padding: w(30) h(30);
 
         .verification-form {
             height: 100%;

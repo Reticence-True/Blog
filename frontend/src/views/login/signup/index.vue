@@ -2,47 +2,19 @@
     <div class="child-container">
         <div class="title">注 册</div>
         <div class="signup-form">
-            <el-form
-                :inline="false"
-                size="large"
-                :model="userInfo"
-                ref="signupFormRef"
-                :rules="rules"
-            >
+            <el-form :inline="false" size="large" :model="userInfo" ref="signupFormRef" :rules="rules">
                 <el-form-item prop="username">
-                    <el-input
-                        placeholder="用户名"
-                        size="large"
-                        v-model="userInfo.username"
-                        clearable
-                    />
+                    <el-input placeholder="用户名" size="large" v-model="userInfo.username" clearable />
                 </el-form-item>
                 <el-form-item prop="email">
-                    <el-input
-                        placeholder="邮箱"
-                        size="large"
-                        v-model="userInfo.email"
-                        clearable
-                        type="email"
-                    />
+                    <el-input placeholder="邮箱" size="large" v-model="userInfo.email" clearable type="email" />
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input
-                        placeholder="密码"
-                        size="large"
-                        show-password
-                        v-model="userInfo.password"
-                        clearable
-                    />
+                    <el-input placeholder="密码" size="large" show-password v-model="userInfo.password" clearable />
                 </el-form-item>
                 <el-form-item>
-                    <el-button
-                        type="primary"
-                        :disabled="loginStore.btnsDisabled"
-                        :loading="loginStore.btnsDisabled"
-                        class="login-btn"
-                        @click="signupEvent"
-                    >
+                    <el-button type="primary" :disabled="loginStore.btnsDisabled" :loading="loginStore.btnsDisabled"
+                        class="login-btn" @click="signupEvent">
                         注册
                     </el-button>
                 </el-form-item>
@@ -192,7 +164,7 @@ export default {
     align-items: center;
 
     .title {
-        font-size: 6rem;
+        font-size: w(60);
         color: #000;
     }
 
@@ -205,7 +177,7 @@ export default {
 
         .el-input {
             width: 100%;
-            height: 5rem;
+            height: h(50);
         }
 
         .el-button {

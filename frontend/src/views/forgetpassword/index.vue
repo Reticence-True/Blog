@@ -100,14 +100,14 @@ const resetPassword = debounce(async () => {
         height: 30%;
         max-height: $max-viewport-height * 0.3;
         min-height: $min-viewport-height * 0.3;
-        border-radius: 1.2rem;
-        box-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
-        border: 0.1rem solid #fff;
+        border-radius: w(12);
+        box-shadow: w(3) w(3) w(3) rgba(0, 0, 0, 0.3);
+        border: 1px solid #fff;
         background-color: var(--background-100);
         display: flex;
         justify-content: space-around;
         flex-direction: column;
-        padding: 3rem;
+        padding: w(30) h(30);
 
         .forget-form {
             height: 100%;

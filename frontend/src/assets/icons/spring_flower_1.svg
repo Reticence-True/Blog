@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="300" viewBox="0 0 512 512"
+     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross flower icon">
+  <title>Cross Flower Icon</title>
+  <defs>
+    <style><![CDATA[
+      .petal { fill: #ffd8e8; stroke: #e68ab2; stroke-width: 10; stroke-linejoin: round; }
+      .center { fill: #e68ab2; stroke: #c85f83; stroke-width: 6; }
+    ]]></style>
+  </defs>
+
+  <g transform="translate(256,256)">
+    <!-- Top petal -->
+    <path class="petal" d="M0,-140 
+        C30,-170,80,-170,100,-120
+        C115,-85,90,-40,60,-20
+        C30,0,-30,0,-60,-20
+        C-90,-40,-115,-85,-100,-120
+        C-80,-170,-30,-170,0,-140Z" transform="rotate(0)"/>
+    <!-- Right petal -->
+    <path class="petal" d="M0,-140 
+        C30,-170,80,-170,100,-120
+        C115,-85,90,-40,60,-20
+        C30,0,-30,0,-60,-20
+        C-90,-40,-115,-85,-100,-120
+        C-80,-170,-30,-170,0,-140Z" transform="rotate(90)"/>
+    <!-- Bottom petal -->
+    <path class="petal" d="M0,-140 
+        C30,-170,80,-170,100,-120
+        C115,-85,90,-40,60,-20
+        C30,0,-30,0,-60,-20
+        C-90,-40,-115,-85,-100,-120
+        C-80,-170,-30,-170,0,-140Z" transform="rotate(180)"/>
+    <!-- Left petal -->
+    <path class="petal" d="M0,-140 
+        C30,-170,80,-170,100,-120
+        C115,-85,90,-40,60,-20
+        C30,0,-30,0,-60,-20
+        C-90,-40,-115,-85,-100,-120
+        C-80,-170,-30,-170,0,-140Z" transform="rotate(270)"/>
+
+    <!-- Center circle -->
+    <circle class="center" cx="0" cy="0" r="44"/>
+  </g>
+</svg>

@@ -14,15 +14,15 @@ export default {
 
 <style scoped lang="scss">
 .blog {
-    font-size: 2rem;
+    font-size: clamp(20px, w(20), 25px);
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
     img {
-        width: 3rem;
-        height: 3rem;
-        margin-right: 1rem;
+        width: clamp(30px, w(30), 50px);
+        height: clamp(30px, w(30), 50px);
+        margin-right: w(10);
     }
 }
 </style>

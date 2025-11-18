@@ -3,12 +3,15 @@
 @import "colorSeriesMixin";
 
 /* 屏幕适配 16:9 */
+// 标准分辨率
+$standard-viewport-width: 1920;
+$standard-viewport-height: 1080;
 // 最大分辨率 4K
-$max-viewport-width: 3840px;
-$max-viewport-height: 2160px;
+$max-viewport-width: 3840;
+$max-viewport-height: 2160;
 // 最小分辨率 1080p
-$min-viewport-width: 1280px;
-$min-viewport-height: 540px;
+$min-viewport-width: 1280;
+$min-viewport-height: 960;
 
 /* 四季主色调 */
 // =============== 春季 🌸 ===============
@@ -43,10 +46,15 @@ $winter-text-secondary: #4b5e8a; // 浅蓝灰，次文字
 $winter-border-color: #e0e3e7;
 $winter-bg: #f7f9fb;
 
+:root {
+    --standard-viewport-width: #{$standard-viewport-width};
+    --standard-viewport-height: #{$standard-viewport-height};
+}
+
 /* layout */
 
 /* tabbar */
-$tabbar-base-height: 8rem;
+$tabbar-base-height: 80;
 
 /* main */
 

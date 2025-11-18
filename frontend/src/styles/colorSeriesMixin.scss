@@ -1,12 +1,12 @@
 // 主题色色阶变量混入
 @mixin el-theme-variables($primary) {
     --primary-base: #{$primary};
-    --primary-l3: #{lighten($primary, 5%)};
-    --primary-l5: #{lighten($primary, 15%)};
-    --primary-l7: #{lighten($primary, 20%)};
-    --primary-l8: #{lighten($primary, 30%)};
-    --primary-l9: #{lighten($primary, 40%)};
     --primary-d2: #{darken($primary, 20%)};
+
+    // 浅色系定义
+    @for $i from 3 through 11 {
+        --primary-l#{$i}: #{lighten($primary, ($i - 2) * 5)};
+    }
 }
 
 // 主题色色阶混入

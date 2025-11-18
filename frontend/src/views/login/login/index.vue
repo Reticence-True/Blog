@@ -4,7 +4,7 @@
             <div>登 录</div>
         </div>
         <div class="login-form">
-            <el-form label-width="80rem" size="large" label-position="top" ref="loginFormRef" :rules="rules"
+            <el-form :label-width="w(80)" size="large" label-position="top" ref="loginFormRef" :rules="rules"
                 :model="loginForm">
                 <el-form-item prop="username">
                     <el-input placeholder="用户名" size="large" v-model="loginForm.username" clearable></el-input>
@@ -36,6 +36,7 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { debounce, cloneDeep } from 'lodash'
+import { w, h } from '@/utils/responsiveSize'
 import { ElNotification, FormInstance, FormRules } from 'element-plus'
 import { reqLogin } from '@/api/login'
 import type { UserInfo } from '@/store/modules/type/user'
@@ -142,7 +143,7 @@ export default {
     align-items: center;
 
     .title {
-        font-size: 6rem;
+        font-size: w(60);
         color: #000;
     }
 
@@ -155,7 +156,7 @@ export default {
 
         .el-input {
             width: 100%;
-            height: 5rem;
+            height: h(50);
         }
 
         .login-btn {

@@ -50,15 +50,15 @@ export default {
 .user {
     display: flex;
     align-items: center;
-    font-size: 1.8rem;
-    margin-left: 4.5rem;
+    font-size: w(18);
+    margin-left: w(45);
 
     .avatar {
-        width: 3rem;
-        height: 3rem;
+        width: clamp(30px, w(30), 50px);
+        height: clamp(30px, w(30), 50px);
         border-radius: 50%;
-        margin-right: 1rem;
-        border: 0.1rem solid --text-primary;
+        margin-right: w(10);
+        border: 1px solid --text-primary;
     }
 
     .el-menu {
@@ -67,7 +67,7 @@ export default {
         border: none;
 
         :deep(.el-sub-menu__title) {
-            font-size: 1.6rem;
+            font-size: clamp(16px, w(16), 20px);
             border: none;
         }
     }

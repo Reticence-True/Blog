@@ -38,7 +38,7 @@ export default {
 
 <style scoped lang="scss">
 .el-menu-item {
-    font-size: 1.8rem;
+    font-size: clamp(18px, w(18), 25px);
     // background-color: var(--background-100);
     background-color: transparent;
 

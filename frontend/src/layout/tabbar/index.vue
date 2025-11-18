@@ -1,5 +1,5 @@
 <template>
-    <div class="tabbar-container">
+    <div class="tabbar-container" ref="tabbarContainerRef">
         <div class="tabbar-left">
             <Blog></Blog>
         </div>
@@ -19,9 +19,30 @@ import Menu from '@/layout/menu/index.vue'
 import User from '@/layout/user/index.vue'
 
 import { useUserStore } from '@/store/modules/user'
+import { ref } from 'vue'
 
 const userStore = useUserStore()
 const $route = useRoute()
+
+const tabbarContainerRef = ref<HTMLDivElement>()
+
+// 设置tabbar是否透明
+const isTabbarTransparent = (isTransparent: boolean) => {
+    if (!tabbarContainerRef.value) {
+        return
+    }
+    const tabbarContainer = tabbarContainerRef.value
+    if (isTransparent) {
+        tabbarContainer.classList.add('tabbar-container-transparent')
+    } else {
+        tabbarContainer.classList.remove('tabbar-container-transparent')
+    }
+}
+
+defineExpose({
+    isTabbarTransparent,
+})
+
 </script>
 <script lang="ts">
 export default {
@@ -36,20 +57,19 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // background-color: var(--background-100);
-    // border: 1px solid var(--background-300);
-    background-color: transparent;
+    background-color: #fff;
     overflow: hidden;
+    transition: background-color 0.15s ease-in-out;
 
     .tabbar-left {
-        margin-left: 12rem;
+        margin-left: w(120);
     }
 
     .tabbar-right {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-right: 15rem;
+        margin-right: w(150);
 
         .route-menu {
             height: $tabbar-base-height;
@@ -57,5 +77,9 @@ export default {
             border-bottom: none;
         }
     }
+}
+
+.tabbar-container-transparent {
+    background-color: transparent;
 }
 </style>
