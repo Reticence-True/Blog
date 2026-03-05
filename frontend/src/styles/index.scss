@@ -2,40 +2,46 @@
 @import "./reset.scss";
 
 @font-face {
-    font-family: "Alibaba PuHuiTi";
-    src:
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf")
-            format("truetype"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.otf")
-            format("opentype"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff")
-            format("woff"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff2")
-            format("woff2");
-    font-display: swap;
-    font-weight: normal;
+  font-family: "Alibaba PuHuiTi";
+  src:
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.ttf")
+      format("truetype"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.otf")
+      format("opentype"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff") format("woff"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-55-Regular/AlibabaPuHuiTi-3-55-Regular.woff2")
+      format("woff2");
+  font-display: swap;
+  font-weight: normal;
 }
 @font-face {
-    font-family: "Alibaba PuHuiTi";
-    src:
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.ttf") format("truetype"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.otf") format("opentype"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.woff") format("woff"),
-        url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.woff2") format("woff2");
-    font-display: swap;
-    font-weight: bold;
+  font-family: "Alibaba PuHuiTi";
+  src:
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.ttf") format("truetype"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.otf") format("opentype"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.woff") format("woff"),
+    url("../assets/fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3-85-Bold/AlibabaPuHuiTi-3-85-Bold.woff2") format("woff2");
+  font-display: swap;
+  font-weight: bold;
+}
+
+/* 定义最大分辨率和最小分辨率 */
+:root {
+  --min-resolution-width: 1280px;
+  --min-resolution-height: 720px;
+  --max-resolution-width: 3840px;
+  --max-resolution-width: 3840px;
 }
 
 html {
-    width: 100vw;
-    height: 100vh;
-    font-size: clamp(10px, w(10), 20px);
-    font-family: "Alibaba PuHuiTi", sans-serif;
-    color: var(--text-100);
-    overflow: hidden;
+  width: clamp(var(--min-resolution-width), 100%, var(--max-resolution-width));
+  height: clamp(var(--min-resolution-height), 100vh, var(--max-resolution-height));
+  font-size: clamp(10px, w(10), 20px);
+  font-family: "Alibaba PuHuiTi", sans-serif;
+  color: var(--text-100);
 }
 
 #app {
-    width: 100vw;
-    height: 100vh;
+  width: 100%;
+  height: 100%;
 }
