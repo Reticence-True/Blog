@@ -2,6 +2,10 @@
 // 导入mixin
 @import "colorSeriesMixin";
 
+/* 颜色变量 */
+// 非主题色
+$text-100: #333;
+
 /* 屏幕适配 16:9 */
 // 标准分辨率
 $standard-viewport-width: 1920;
@@ -46,11 +50,6 @@ $winter-text-secondary: #4b5e8a; // 浅蓝灰，次文字
 $winter-border-color: #e0e3e7;
 $winter-bg: #f7f9fb;
 
-:root {
-    --standard-viewport-width: #{$standard-viewport-width};
-    --standard-viewport-height: #{$standard-viewport-height};
-}
-
 /* layout */
 
 /* tabbar */
@@ -58,43 +57,54 @@ $tabbar-base-height: 80;
 
 /* main */
 
+/** CSS Variables */
+:root {
+  --standard-viewport-width: #{$standard-viewport-width}px;
+  --standard-viewport-height: #{$standard-viewport-height}px;
+  --max-viewport-width: #{$max-viewport-width}px;
+  --max-viewport-height: #{$max-viewport-height}px;
+  --min-viewport-width: #{$min-viewport-width}px;
+  --min-viewport-height: #{$min-viewport-height}px;
+  --tabbar-base-height: #{$tabbar-base-height}px;
+}
+
 /* 主题 */
 :root[data-theme="spring"] {
-    --border-color: #{$spring-border-color};
+  --border-color: #{$spring-border-color};
 
-    @include el-theme($spring-primary);
-    @include el-theme-variables($spring-primary);
-    @include accent-colors-variables($spring-accent);
-    @include text-colors-variables($spring-text-primary, $spring-text-secondary);
-    @include background-colors-variables($spring-bg);
+  @include el-theme($spring-primary);
+  @include el-theme-variables($spring-primary);
+  @include accent-colors-variables($spring-accent);
+  @include text-colors-variables($spring-text-primary, $spring-text-secondary);
+  @include background-colors-variables($spring-bg);
 }
 
 :root[data-theme="summer"] {
-    --border-color: #{$summer-border-color};
+  --border-color: #{$summer-border-color};
 
-    @include el-theme($summer-primary);
-    @include el-theme-variables($summer-primary);
-    @include accent-colors-variables($summer-accent);
-    @include text-colors-variables($summer-text-primary, $summer-text-secondary);
-    @include background-colors-variables($summer-bg);
+  @include el-theme($summer-primary);
+  @include el-theme-variables($summer-primary);
+  @include accent-colors-variables($summer-accent);
+  @include text-colors-variables($summer-text-primary, $summer-text-secondary);
+  @include background-colors-variables($summer-bg);
 }
 
 :root[data-theme="autumn"] {
-    --border-color: #{$autumn-border-color};
+  --border-color: #{$autumn-border-color};
 
-    @include el-theme($autumn-primary);
-    @include el-theme-variables($autumn-primary);
-    @include accent-colors-variables($autumn-accent);
-    @include text-colors-variables($autumn-text-primary, $autumn-text-secondary);
-    @include background-colors-variables($autumn-bg);
+  @include el-theme($autumn-primary);
+  @include el-theme-variables($autumn-primary);
+  @include accent-colors-variables($autumn-accent);
+  @include text-colors-variables($autumn-text-primary, $autumn-text-secondary);
+  @include background-colors-variables($autumn-bg);
 }
 
 :root[data-theme="winter"] {
-    --border-color: #{$winter-border-color};
+  --border-color: #{$winter-border-color};
 
-    @include el-theme($winter-primary);
-    @include el-theme-variables($winter-primary);
-    @include accent-colors-variables($winter-accent);
-    @include text-colors-variables($winter-text-primary, $winter-text-secondary);
-    @include background-colors-variables($winter-bg);
+  @include el-theme($winter-primary);
+  @include el-theme-variables($winter-primary);
+  @include accent-colors-variables($winter-accent);
+  @include text-colors-variables($winter-text-primary, $winter-text-secondary);
+  @include background-colors-variables($winter-bg);
 }

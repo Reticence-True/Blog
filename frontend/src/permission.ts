@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash';
 import { useLoginStore } from './store/modules/login';
 import { useUserStore } from './store/modules/user';
 import { reqGetUserInfo } from './api/user';
-import { ElNotification } from 'element-plus';
+import notify from './utils/notify';
 
 const loginStore = useLoginStore(pinia);
 const userStore = useUserStore(pinia);
@@ -33,17 +33,13 @@ router.beforeEach(async (to, _from, next) => {
         break;
       // token过期
       case 401:
-        ElNotification.info(userResult.message);
-        next('/login');
-        return;
       // token错误
+      // fall through
       case 402:
-        ElNotification.info(userResult.message);
-        next('/login');
-        return;
       // 其他错误
+      // fall through
       default:
-        ElNotification.info(userResult.message);
+        notify.info(userResult.message ?? '');
         next('/login');
         return;
     }

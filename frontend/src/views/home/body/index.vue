@@ -27,7 +27,7 @@
       </el-row>
     </div>
     <div class="body-essay" ref="bodyRight">
-      <div class="new-text">最新内容</div>
+      <div class="new-text">文章</div>
       <div class="new-essays">
         <template v-for="count in essayItemCount" :key="count">
           <essay-card ref="essayCardRef">
@@ -245,7 +245,7 @@ const createFlowCharts = () => {
       // 未选中文字
       label: { color: getCssVariable('--primary-l7') },
       // 控制按钮：播放，下一个和前一个
-      controlStyle: { color: getCssVariable('--primary-l3') },
+      controlStyle: { show: false },
       // 走过的线段/选中按钮/背景按钮的样式
       progress: {
         lineStyle: { color: getCssVariable('--primary-l9') },

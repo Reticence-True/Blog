@@ -27,9 +27,10 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
+          // additionalData 的 import 会放在 index.scss 的开头，所以会比 index.scss 的数据更先执行
           additionalData: `
-          @import "./src/styles/variable.scss"; 
-          @import "./src/styles/function.scss"; 
+          @use "./src/styles/variable.scss" as *;
+          @use "./src/styles/function.scss" as *;
           `,
         },
       },

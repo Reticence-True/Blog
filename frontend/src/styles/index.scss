@@ -25,20 +25,18 @@
   font-weight: bold;
 }
 
-/* 定义最大分辨率和最小分辨率 */
-:root {
-  --min-resolution-width: 1280px;
-  --min-resolution-height: 720px;
-  --max-resolution-width: 3840px;
-  --max-resolution-width: 3840px;
-}
-
 html {
-  width: clamp(var(--min-resolution-width), 100%, var(--max-resolution-width));
-  height: clamp(var(--min-resolution-height), 100vh, var(--max-resolution-height));
+  height: 100%; // 百分比数值依赖父元素的确切值
   font-size: clamp(10px, w(10), 20px);
   font-family: "Alibaba PuHuiTi", sans-serif;
-  color: var(--text-100);
+  color: $text-100;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #app {

@@ -34,33 +34,29 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   // 移除滚动事件
-  layoutMainRef.value?.removeEventListener('scroll', onLayoutMainScroll)
+  layoutMainRef.value?.wrapRef.removeEventListener('scroll', onLayoutMainScroll)
 })
 </script>
 
 <style lang="scss" scoped>
 .layout {
-  width: 100%;
   height: 100%;
-  display: flex;
   position: relative;
 
   .layout-tabbar {
-    width: 100%;
+    width: clamp($min-viewport-width* 1px, 100%, $max-viewport-width* 1px);
     height: clamp($tabbar-base-height* 1px, h($tabbar-base-height), $tabbar-base-height * 10px);
     min-width: inherit;
     max-width: inherit;
-    position: absolute;
+    position: fixed;
     inset-inline-start: 0;
     inset-block-start: 0;
     z-index: 2;
   }
 
   .layout-main {
-    width: 100%;
+    width: clamp($min-viewport-width* 1px, 100%, $max-viewport-width* 1px);
     height: 100%;
-    min-width: inherit;
-    max-width: inherit;
     position: relative;
   }
 }

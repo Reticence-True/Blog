@@ -21,7 +21,7 @@
     "build:pro": "vue-tsc && vite build --mode production",
     "build:test": "vue-tsc && vite build --mode test",
     "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
-    "dev": "vite --open",
+    "dev": "vite",
     "lint": "eslint . && stylelint --allow-empty-input \"**/*.{css,less,scss}\"",
     "lint:fix": "prettier --write . && eslint --fix . && stylelint --allow-empty-input --fix \"**/*.{css,less,scss}\"",
     "preview": "vite preview",
